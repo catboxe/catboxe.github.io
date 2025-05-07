@@ -448,8 +448,10 @@ display: none;
   transition: filter 0.2s ease-in-out;
 }
 
-.top-nav:hover {
-filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.8));
+@media (min-width: 1051px) {
+  .top-nav:hover {
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.8)) !important;
+  }
 }
 
 .top-nav__left,

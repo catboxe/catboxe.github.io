@@ -1500,4 +1500,45 @@ white-space: normal      !important;
 margin-bottom: 0.3rem     !important;
 }
 
+
+/* -------------------------------------------------------
+   SMALL PHONES: under 426px
+------------------------------------------------------- */
+@media (max-width: 426px) {
+  /* let everything shrink */
+  .top-nav__left,
+  .top-nav__right,
+  .top-nav__main-menus,
+  .dashboard__menus,
+  .topic-listing__figure,
+  .post__aside .post__author {
+    min-width: 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* tighten padding */
+  .content-container { padding: 0 8px; }
+  .top-nav      { padding: 0 6px; }
+  .top-nav__branding { font-size: 16px; margin-right: 4px; }
+  
+  /* collapse ratio bar & avatars */
+  .top-nav__ratio-bar { display: none !important; }
+  .post__avatar,
+  .chatbox-message__avatar {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  /* let chat go full-width */
+  .chatbox-message,
+  .chatbox-message__content {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+
 /*# sourceMappingURL=chat.css.map */

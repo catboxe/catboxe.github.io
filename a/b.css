@@ -6,10 +6,6 @@
  !/* Author URL: https://rkeaves.online                                              !/*
  !/* Feel free to suggest improvements or report any issues.                         !/*
 /*===================================================================================*/
-
-/* ===========================
-    GLOBAL DESIGN VARIABLES  
-=========================== */
 :root {
   --primary-accent: #0b3d91;
   --secondary-accent: #ac3535;
@@ -21,9 +17,6 @@
   --text-primary: #cadcff;
   --text-secondary: #9ca7c2;
   --textarea-fg: #c9c2d1;
-  --quick-search-input-offset: 0px;
-  --content-max-width: 1200px;
-  --content-padding: 20px;
   --data-table-th-bg: #0f1624;
   --subforum-listing-odd-bg: #162439;
   --subforum-listing-even-bg: #1c1c1c;
@@ -53,23 +46,19 @@
   --select-fg: #b5becc;
   --meta-backdrop-filter: brightness(30%);
   --meta-dropdown-backdrop-filter: brightness(2) blur(10px);
-}
-/* ====================
-  MOBILE ADJUSTMENTS
-==================== */
-:root {
-  --bp-md:    1196px;  /* search, logo */
-  --bp-sm:    1030px;  /* stats, icons, avatar */
-  --bp-icon:  1000px;  /* icon-bar */
-  --bp-xs:     800px;  /* full collapse */
   --nav-trans: 0.4s ease-in-out;
+  --bp-md:    1196px;
+  --bp-sm:    1030px;
+  --bp-icon:  1000px;
+  --bp-xs:     800px;
+  --quick-search-input-offset: 0px;
+  --content-max-width: 1200px;
+  --content-padding: 20px;
 }
-/*            --bp-md            */
 @media (max-width: var(--bp-md)) {
   .quick-search {
     display: none !important;
   }
-
   .top-nav__left {
     display: flex !important;
     justify-content: center !important;
@@ -77,7 +66,6 @@
     position: relative !important;
     transition: all var(--nav-trans);
   }
-
   .top-nav__toggle,
   .top-nav__icon-bar {
     position: absolute !important;
@@ -87,7 +75,6 @@
     transition: all var(--nav-trans);
   }
 }
-/*            --bp-sm            */
 @media (max-width: var(--bp-sm)) {
   .top-nav__ratio-bar,
   .top-nav__icon-bar,
@@ -98,7 +85,6 @@
     transition: opacity var(--nav-trans), visibility var(--nav-trans);
   }
 }
-/*            --bp-icon            */
 @media (max-width: var(--bp-icon)) {
   .top-nav__icon-bar {
     display: none !important;
@@ -107,7 +93,6 @@
     transition: opacity var(--nav-trans), visibility var(--nav-trans);
   }
 }
-/*            --bp-xs            */
 @media (max-width: var(--bp-xs)) {
   .top-nav__main-menus,
   .quick-search {
@@ -116,7 +101,6 @@
     visibility: hidden;
     transition: opacity var(--nav-trans), visibility var(--nav-trans);
   }
-
   .top-nav__left {
     display: flex !important;
     justify-content: center !important;
@@ -124,7 +108,6 @@
     position: relative !important;
     transition: all var(--nav-trans);
   }
-
   .top-nav__toggle {
     display: block !important;
     position: absolute !important;
@@ -134,15 +117,11 @@
     transition: all var(--nav-trans);
   }
 }
-/* Hide the search bar */
 @media (max-width: 1230px) {
   .quick-search {
     display: none !important;
   }
 }
-/* ===============================================================  
-   STAFF DASHBOARD
-================================================================= */
 .dashboard__menus > section.panelV2.panel--grid-item {
 background-color:      rgba(18, 22, 32, 0.9) !important;
 background-image:      url('https://ptpimg.me/wy2n6s.png') !important;
@@ -152,27 +131,21 @@ border-radius:        8px                   !important;
 box-shadow:           0 2px 6px rgba(0, 0, 0, 0.6) !important;
 transition:           none                  !important;
 }
-
 .dashboard__menus > section.panelV2.panel--grid-item > .panel__body {
 background: transparent !important;
 box-shadow: none        !important;
 }
-
 .dashboard__menus > section.panelV2.panel--grid-item:hover {
 filter:     none           !important;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6) !important;
 transition: none           !important;
 }
-
 .dashboard__menus 
 > section.panelV2.panel--grid-item 
 > .panel__body a:hover {
 background-color: rgba(255, 255, 255, 0.07) !important;
 border-radius:    4px;
 }
-/* ===============================================================  
-    QUICK SEARCH  
-================================================================= */
 .quick-search__input {
   width: 100% !important;
   height: 35px !important;
@@ -187,18 +160,15 @@ border-radius:    4px;
   position: relative;
   top: var(--quick-search-input-offset);
 }
-
 .quick-search__input:hover {
   transform: scale(1.0035); 
   box-shadow: 0 0 1px rgba(68,138,255,0.6), inset 0 0 4px rgba(130,177,255,0.6); 
   border-color: #33c1ff; 
 }
-
 .quick-search__input:focus {
   border-color: #33c1ff; 
   box-shadow: 0 0 10px rgba(51, 193, 255, 0.6);
 }
-
 .quick-search__input::before {
   content: "";
   position: absolute;
@@ -209,7 +179,6 @@ border-radius:    4px;
   animation: liquidShift 4s ease-in-out infinite;
   z-index: -2;
 }
-
 .quick-search__input::after {
   content: "";
   position: absolute;
@@ -219,35 +188,25 @@ border-radius:    4px;
   pointer-events: none;
   z-index: 1;
 }
-
 @keyframes liquidShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
-
 @keyframes matrixLines {
   0% { background-position: 0 0; }
   100% { background-position: 100px 0; }
 }
-/* ===============================================================  
-    FORUM
-================================================================= */
-
 body .page__forum--topic *,
 body .page__forum--topic *:hover {
   filter:     none !important;
 }
-
 .subforum-listing {
   background-color: rgba(0, 0, 0, 0.3);
-  background-image: url('https://ptpimg.me/wy2n6s.png'); /* https://i.ibb.co/Ps1zwDBD/black-linen.png*/
+  background-image: url('https://ptpimg.me/wy2n6s.png');
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
-/* ===============================================================  
-    ARTICLES PAGE  
-================================================================= */
 .article-preview {
   all: unset !important;
   padding: 18px !important;
@@ -257,9 +216,6 @@ body .page__forum--topic *:hover {
     #1c1c1c !important;
   box-shadow: none !important;
 }
-/* ===============================================================  
-    GENERAL SETTINGS PAGE  
-================================================================= */
 .form__label--floating {
   top: -0.9rem;
   left: 0.75rem;
@@ -268,22 +224,13 @@ body .page__forum--topic *:hover {
   font-size: 0.995rem;
   color: #999;
 }
-/* ===============================================================  
-    SIDE BAR PROFILE  
-================================================================= */
 .key-value__group:nth-child(2n+1) {
   background-color: #2b2f35a3 !important;
 }
-/* ===============================================================  
-    GLOBAL TRANSITION & RESET  
-================================================================= */
 * {
   transition: all 0.4s ease;
   box-sizing: border-box;
 }
-/* ===============================================================  
-   TORRENTS PAGE 
-================================================================= */
 menu.torrent__buttons {
   display: flex !important;
   align-items: center !important;
@@ -291,11 +238,9 @@ menu.torrent__buttons {
   padding: 0 !important;
   margin: 0 !important;
 }
-
 menu.torrent__buttons > li.form__group {
   margin: 0 !important;
 }
-
 menu.torrent__buttons .form__button {
   flex: 1 1 auto !important;
   min-width: 8.5rem !important;
@@ -307,7 +252,6 @@ menu.torrent__buttons .form__button {
   gap: 0.5ch !important;
   box-sizing: border-box !important;
 }
-
 a.form__button--filled.form__button--centered[href*="/torrents/download/"] {
   background: transparent !important;
   border: 1px solid #757575 !important;
@@ -315,47 +259,30 @@ a.form__button--filled.form__button--centered[href*="/torrents/download/"] {
   color: var(--text-primary) !important;
   box-shadow: none !important;
 }
-
 menu.torrent__buttons .form__button:hover {
   background: var(--secondary-accent) !important;
   border-color: var(--secondary-accent) !important;
   color: #fff !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
 }
-
-/* -------------------------------------------------------
-   Make torrent buttons wrap on small screens
-   ------------------------------------------------------- */
-   @media (max-width: 975px) { /* adjust breakpoint as needed */
-    /* 1. Enable wrapping */
-    menu.torrent__buttons {
-      display: flex !important;       /* already flex, but reinforce */
-      flex-wrap: wrap !important;     /* allow items to wrap onto new lines */
-  
-      /* optional: tighten up the gap when wrapping */
-      gap: 0.1rem !important;
-    }
-  
-    /* 2. Let each button flexibly shrink/grow
-          so two fit per row, then wrap */
-    menu.torrent__buttons > li.form__group--short-horizontal {
-      flex: 1 1 48% !important;       /* grow, shrink, basis ~48% */ 
-      min-width: 40% !important;      /* ensure theyâ€™re not too narrow */
-      margin-bottom: 0rem !important;
-    }
-  
-  }
-
-/* ===============================================================  
-    FOOTER
-================================================================= */
+@media (max-width: 975px) {
+  menu.torrent__buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.1rem !important;
+}
+  menu.torrent__buttons > li.form__group--short-horizontal {
+    flex: 1 1 48% !important;
+    min-width: 40% !important;
+    margin-bottom: 0rem !important;
+}
+}
 .footer__section-title {
   position: relative;
   display: inline-block;
   padding-left: 55px;
   margin-top: -10px;
 }
-
 .footer__wrapper > .footer__section:first-child .footer__section-title::before {
   content: '';
   position: absolute;
@@ -364,22 +291,19 @@ menu.torrent__buttons .form__button:hover {
   transform: translateY(-50%);
   width: 55px;
   height: 55px;
-  background-image: url('https://ptpimg.me/9wbam9.png'); /* https://i.ibb.co/6R4KKM1H/pss-logo3.png */
+  background-image: url('https://ptpimg.me/9wbam9.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
-
 .footer__section-title img {
   display: none;
 }
-
 .footer__section-list {
   display: block;
   text-align: left;
   padding-left: 20px;
 }
-
 .footer__section-title {
   padding-left: 50px;
   padding-bottom: 2px;
@@ -392,12 +316,7 @@ menu.torrent__buttons .form__button:hover {
   list-style-type: none;
   margin: 0;
 }
-/* ===============================================================  
-    BODY & MAIN CONTENT CONTAINER  
-================================================================= */
-
 body {
-/*! font-family: 'Space Grotesk', sans-serif !important; */
   font-size: 14px;
   color: var(--text-primary);
   background: var(--dark-base);
@@ -409,14 +328,9 @@ body {
   margin: 0 auto;
   padding: 0 var(--content-padding);
 }
-/* ===============================================================  
-    NAVIGATION & HEADER COMPONENTS 
-================================================================= */
-
 .alert {
   background-color: #0b101c !important;
 }
-
 .top-nav__branding::before {
   content: "";
   display: block;
@@ -432,28 +346,23 @@ body {
   margin-right: -14px;
   margin-bottom: -4px;
 }
-
 .top-nav__branding:hover::before {
   transform: scale(1.0611);
 }
-
 .top-nav__branding img {
 display: none;
 }
-
 .top-nav {
   background: linear-gradient(145deg, #10182b 0%, #1a2233 100%);
   border-bottom: 2px solid var(--primary-accent);
   position: relative;
   transition: filter 0.2s ease-in-out;
 }
-
 @media (min-width: 1051px) {
   .top-nav:hover {
     filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.8)) !important;
   }
 }
-
 .top-nav__left,
 .top-nav__right,
 .top-nav__main-menus,
@@ -465,14 +374,12 @@ display: none;
   font-size: 18px;
   color: var(--text-primary);
 }
-
 @keyframes cleanStatic {
 0% { text-shadow: 2px 2px 4px rgba(255, 51, 102, 0.7), -2px -2px 4px rgba(51, 193, 255, 0.7); }
 25% { text-shadow: -2px 2px 4px rgba(255, 51, 102, 0.7), 2px -2px 4px rgba(51, 193, 255, 0.7); }
 50% { text-shadow: 2px 2px 4px rgba(255, 51, 102, 0.7), -2px -2px 4px rgba(51, 193, 255, 0.7); }
 100% { text-shadow: 2px 2px 4px rgba(255, 51, 102, 0.7), -2px -2px 4px rgba(51, 193, 255, 0.7); }
 }
-
 .top-nav__site-logo {
 font-family: 'Orbitron', monospace !important;
 background-image: radial-gradient(circle at 65% 35%, #fff 25%, #fff 60%, #fff 90%);
@@ -484,34 +391,25 @@ animation: cleanStatic 2s infinite ease-in-out;
 text-shadow: 2px 2px 4px rgba(255, 51, 102, 0.7), -2px -2px 4px rgba(51, 193, 255, 0.7);
 transition: text-shadow 0.3s ease, filter 0.3s ease;
 }
-
 .top-nav__site-logo:hover {
   filter: drop-shadow(0 0 5px var(--primary-accent));
   text-shadow: 0 0 20px var(--cyber-magenta), 0 0 30px var(--cyber-magenta);
 }
-
 .secondary-nav {
   background: linear-gradient(to right, #10182b 0%, #1a2233 50%, #10182b 100%);
   border-color: var(--primary-accent);
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.7);
 }
-
 .top-nav__dropdown ul,
 .nav-tab-menu__items {
 background: #161e30;
 border-radius: 8px;
 transition: box-shadow 0.2s ease;
 }
-
 .top-nav__dropdown ul:hover,
 .nav-tab-menu__items:hover {
 box-shadow: 0 8px 21px rgba(0, 0, 0, 0.76);
 }
-
-/* ===============================================================
-    Stats Box (Ratio Bar)  Shared styles + hover transform
-================================================================= */
-
 .top-nav__ratio-bar {
 position: relative;
 display: inline-flex;
@@ -529,7 +427,6 @@ transition:
   transform 0.5s ease,
   box-shadow 0.3s ease;
 }
-
 .top-nav__ratio-bar::before {
 content: "";
 position: absolute; inset: 0;
@@ -539,7 +436,6 @@ background-size: 400% 400%;
 animation: liquidShift 4s ease-in-out infinite;
 z-index: -2;
 }
-
 .top-nav__ratio-bar::after {
 content: "";
 position: absolute; inset: 0;
@@ -554,24 +450,20 @@ animation: matrixLines 5s linear infinite;
 pointer-events: none;
 z-index: 1;
 }
-
 .top-nav__ratio-bar:hover {
 transform: scale(1.015);
 box-shadow:
   0 0 6px rgba(68,138,255,0.6),
   inset 0 0 4px rgba(130,177,255,0.6);
 }
-
 @keyframes liquidShift {
 0%,100% { background-position: 0% 50%; }
 50%     { background-position: 100% 50%; }
 }
-
 @keyframes matrixLines {
 0%   { background-position: 0 0; }
 100% { background-position: 100px 0; }
 }
-
 @media (max-width: 768px) {
 .top-nav__ratio-bar {
   display: grid;
@@ -579,7 +471,6 @@ box-shadow:
   grid-gap: 0.5rem;
   font-size: 0.9rem;
 }
-
 .top-nav__ratio-bar::before,
 .top-nav__ratio-bar::after {
   content: "";
@@ -589,36 +480,27 @@ box-shadow:
   width: 15px;
   pointer-events: none;
 }
-
 .top-nav__ratio-bar::before { left: 0; }
 .top-nav__ratio-bar::after  { right: 0; }
 }
-/* ===============================================================  
-    TORENT SEARCH  
-================================================================= */
 .form__group--short-horizontal .vscomp-toggle-button {
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
-
   background-color: rgba(var(--surface-02-rgb), var(--vs-toggle-bg-opacity)) !important;
   box-shadow:
     inset 0 0 2px rgba(255,255,255, var(--vs-toggle-inset-opacity)),
     0 0 8px rgba(11,61,145, var(--vs-toggle-glow-opacity)) !important;
-
   border: 1px solid #686868 !important;
   border-radius: 4px !important;
-
   padding: 6px 30px 6px 10px !important;
   font-family: 'Orbitron', monospace !important;
   font-size: 0.9rem !important;
   color: var(--text-primary) !important;
-
   position: relative;
   cursor: pointer;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-
 .form__group--short-horizontal .vscomp-toggle-button:hover,
 .form__group--short-horizontal .vscomp-toggle-button:focus {
   outline: none !important;
@@ -627,7 +509,6 @@ box-shadow:
     inset 0 0 2px rgba(255,255,255, var(--vs-toggle-inset-focus-opacity)),
     0 0 12px rgba(11,61,145, var(--vs-toggle-glow-focus-opacity)) !important;
 }
-
 .form__group--short-horizontal .vscomp-toggle-button::after {
   content: '';
   position: absolute;
@@ -641,31 +522,23 @@ box-shadow:
   transform: rotate(45deg);
   pointer-events: none;
 }
-
 .form__group--short-horizontal .vscomp-dropbox-container {
   background-color: rgba(var(--surface-02-rgb), var(--vs-toggle-bg-opacity)) !important;
   border: 1px solid var(--surface-01) !important;
   border-radius: 4px !important;
   box-shadow: 0 0 8px rgba(11,61,145, var(--vs-toggle-glow-opacity)) !important;
 }
-
-/* ===============================================================  
-    USER PROFILE
-================================================================= */
 .profile__about .bbcode-rendered,
 .profile__about .bbcode-rendered pre {
   box-shadow: none !important;
   background: transparent !important;
 }
-
 .panel__body img:not(.profile__avatar) {
 transition: transform 0.35s ease-in-out;
 }
-
 .panel__body img:not(.profile__avatar):not(.post__avatar):hover {
   transform: scale(1.043);
 }
-
 .profile__avatar {
 display: inline-block;
 border-radius: 50%;
@@ -673,7 +546,6 @@ border: 3px solid transparent;
 transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, border-color 0.3s ease;
 animation: subtle-float 5s ease-in-out infinite;
 }
-
 @keyframes subtle-float {
 0%, 100% {
   transform: translateY(0);
@@ -684,16 +556,11 @@ animation: subtle-float 5s ease-in-out infinite;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 }
-
 .profile__avatar:hover {
 filter: brightness(1.1);
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 border-color: #003366;
 }
-
-/* ===============================================================  
-    USER PROFILE HEADER  
-================================================================= */
 .top-nav__username--highresolution,
 .top-nav--right__icon-link,
 .top-nav__toggle {
@@ -706,19 +573,12 @@ border-color: #003366;
 .top-nav--right__icon-link:hover {
   color: var(--cyber-magenta);
 }
-
-
 .user-search__avatar {
 transition: transform 0.3s ease-in-out;
 }
-
 .user-search__avatar:hover {
 transform: scale(1.1);
 }
-
-/* ===============================================================  
-    QUICK SEARCH  
-================================================================= */
 .quick-search {
   display: flex;
   justify-content: center;
@@ -754,27 +614,17 @@ transform: scale(1.1);
   height: 40px;
   margin-right: 10px;
 }
-
 .quick-search__result-year,
 .quick-search__result-type {
   font-size: 11px;
   color: var(--text-secondary);
 }
-
-/* ===============================================================  
-    PANELS, CARDS, FORMS, BUTTONS  
-================================================================= */
-
 .panelV2:has(.bbcode-input__input):hover {
   filter: none !important;
 }
-
-
 .panelV2.blocks__news .article-preview {
   all: revert !important;
 }
-
-/* Panels */
 .panelV2 {
   background: #272727;
   border-radius: 8px;
@@ -799,8 +649,6 @@ transform: scale(1.1);
   color: var(--text-primary);
   background: var(--panel-bg) !important;
 }
-
-/* Cards */
 .torrent-card {
   background: linear-gradient(135deg, var(--surface-02), #0e1a30);
   border: 1px solid var(--primary-accent);
@@ -836,8 +684,6 @@ transform: scale(1.1);
   font-size: 10.5px;
   animation: subtlePulse 6s ease-in-out infinite;
 }
-
-/* Forms & Buttons */
 .form__button--filled,
 button {
   background: var(--primary-accent);
@@ -848,42 +694,32 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
-
 button.post__tip-button:hover {
   background: transparent !important;
   box-shadow: none         !important;
 }
-
 button.form__standard-icon-button:hover i {
 text-shadow: 0 0 8px #ffffff, 0 0 15px #ffffff, 0 0 25px #ffffff; /* White glow */
 transition: text-shadow 0.3s ease;
 }
-
 button:not(.form__standard-icon-button):hover i {
 text-shadow: none;
 }
-
-/* Exclude these specific buttons from the white shadow effect */
 button.form__button.form__standard-icon-button.form__standard-icon-button--skinny:hover i,
 button[title="Toggle typing notifications"]:hover i,
 button[title="Toggle typing notifications"] i.fa-bell:hover {
-text-shadow: none; /* Remove text-shadow */
+text-shadow: none;
 }
-
-/* Exclude specific buttons from the hover effect */
 button.form__button.form__standard-icon-button.form__standard-icon-button--skinny:hover,
 button[title="Toggle typing notifications"]:hover,
 button[title="Toggle typing notifications"] i.fa-bell:hover {
 background: none;
 box-shadow: none;
 }
-
 input,
 textarea,
 select {
-  /*! background: var(--surface-02); */
   color: var(--text-primary);
-  /*! border: 1px solid var(--primary-accent); */
   padding: 8px;
   border-radius: 4px;
   font-family: 'Space Grotesk', sans-serif !important;
@@ -895,21 +731,13 @@ select:focus {
   border-color: var(--cyber-cyan);
   box-shadow: 0 0 6px var(--cyber-cyan);
 }
-
-/* ===============================================================  
-   Latest Posts
-================================================================= */
-
-/* Clamp long usernames in the post author panel to one line with ellipsis */
 .post__aside .post__author {
-  display: block !important;           /* make it a block so width works */
-  max-width: 100% !important;          /* never exceed its container */
-  white-space: nowrap !important;      /* no wrapping */
-  overflow: hidden !important;         /* hide the overflow */
-  text-overflow: ellipsis !important;  /* add Ã¢â‚¬Å“Ã¢â‚¬Â¦Ã¢â‚¬Â */
+  display: block !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
-
-/* Also ensure the <a> itself canÃ¢â‚¬â„¢t overflow */
 .post__aside .post__author .user-tag__link {
   display: block !important;
   max-width: 100% !important;
@@ -917,147 +745,98 @@ select:focus {
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
-
-/* make the username smaller */
 .post__aside .post__author .user-tag__link {
-  font-size: 1.25rem !important;   /* tweak this value as needed */
+  font-size: 1.25rem !important;
   line-height: 1.2 !important;
 }
-
 .post__aside .post__author {
   font-size: 1.07rem !important;
 }
-
-/* wrap icons in a polished rounded pill */
 .post__aside .post__author i,
 .post__aside .post__author a.fas.fa-envelope {
   vertical-align: middle;
   padding: 1px 1px;
   font-size: 0.92rem;
 }
-
-/* shrink every post avatar (and its img) to match airclayÃ¢â‚¬â„¢s size */
 .post__avatar,
 .post__avatar img {
   width: 135px !important;
   height: 135px !important;
-  display: block !important;    /* kills any flex/grow shenanigans */
-  object-fit: cover !important; /* crop to fill */
-  margin: 0 auto !important;    /* recenter if needed */
+  display: block !important;
+  object-fit: cover !important;
+  margin: 0 auto !important;
 }
-
-/* 1) Remove the existing heavy hover/filter/box-shadow on .blocks__posts panels */
 .panelV2.blocks__posts {
   filter:          none   !important;
   box-shadow:      none   !important;
 }
-
 .panelV2.blocks__posts:hover {
   box-shadow:
-    /* original panel depth */
     0 4px 12px rgba(0, 0, 0, 0.25),
-    /* cyan glow on top */
     0 0 9px #33c1ff
     !important;
 }
-
-/* ===============================================================  
-    DATA TABLES  
-================================================================= */
 .data-table th {
   background: var(--surface-02);
   color: var(--text-primary);
   border-bottom: 2px solid var(--primary-accent);
 }
-
-/* ===============================================================  
-    TYPOGRAPHY  
-================================================================= */
 h1, h2, h3, h4 {
   font-family: 'JetBrains Mono', monospace !important;
   color: var(--text-primary);
 }
-
 h1:not(.panel__heading):hover,
 h2:not(.panel__heading):hover,
 h3:not(.panel__heading):hover,
 h4:not(.panel__heading):hover {
 filter: drop-shadow(0 0 3px var(--cyber-cyan));
 }
-
 .text-info {
   color: var(--text-secondary);
 }
 .text-info:hover {
   color: var(--cyber-magenta);
 }
-
-/* ===============================================================  
-    DONATIONS PAGE  
-================================================================= */
 .donation-package__wrapper {
-  background: url('https://ptpimg.me/wy2n6s.png') repeat; /* https://i.ibb.co/Ps1zwDBD/black-linen.png*/
-  box-shadow: 0 4.5px 7px rgba(0, 0, 0, 0.8); /* Black drop shadow */
+  background: url('https://ptpimg.me/wy2n6s.png') repeat;
+  box-shadow: 0 4.5px 7px rgba(0, 0, 0, 0.8);
 }
-
 body:has(.donation-packages) section.panelV2:hover {
-  /* remove neon border & drop-shadow */
   filter: none !important;
   box-shadow: none !important;
-  background: var(--surface-02) !important; /* preserve fill */
+  background: var(--surface-02) !important;
 }
-
-
 body:has(.donation-packages) .donation-package .form__button--filled {
-  /* include color in the transition list */
   transition:
     transform 0.12s ease-out,
     box-shadow 0.12s ease-out,
     background-color 0.12s ease-out,
     color 0.2s ease-out;
-  color: #fff;  /* ensure starting color is white */
+  color: #fff;
 }
-
 body:has(.donation-packages) .donation-package .form__button--filled:hover {
-  color: #f73838 !important;  /* ~3% toned-down red */
+  color: #f73838 !important;
 }
-
-/* ===============================================================  
-    TORRENT DESCRIPTION  
-================================================================= */
-
-/* Apply the same texture to the panel__body and bbcode-rendered sections */
 .panel__body,
 .bbcode-rendered,
 .form__textarea, 
 .bbcode-input__input,
 .bbcode-input__tab-pane {
-  background: url('https://ptpimg.me/wy2n6s.png') repeat; /* https://i.ibb.co/Ps1zwDBD/black-linen.png*/
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* Black drop shadow */
+  background: url('https://ptpimg.me/wy2n6s.png') repeat;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
-
-/* ===============================================================  
-    CREATE NEW PLAYLIST PAGE  
-================================================================= */
-
 .bbcode-input__tab-pane {
   background-color: #1c1c1c !important;
 }
-
-/* ===============================================================  
-    CHATBOX & MESSAGES  
-================================================================= */
 .chatroom__whispers {
   margin-top:     5px !important;
   margin-left:    16px !important;
   font-size:      11px !important;
   color:          rgba(255, 255, 255, 0.8) !important;
   letter-spacing: 0.4px !important;
-  /* base shadow */
   text-shadow:    0 2px 2px rgba(0, 0, 0, 0.9) !important;
   transition:     color 150ms ease-in-out,
                   text-shadow 150ms ease-in-out !important;
-  /* subtle glow animation */
   animation:      typewriterGlow 3s ease-in-out infinite !important;
 }
 
@@ -1065,84 +844,54 @@ body:has(.donation-packages) .donation-package .form__button--filled:hover {
   color:          rgba(255, 255, 255, 1.0) !important;
   text-shadow:    0 2px 2px rgba(0, 0, 0, 1.0) !important;
 }
-
-/* animate the glow by adding a soft white blur at 50% of each cycle */
 @keyframes typewriterGlow {
   0%, 100% {
     text-shadow:
       0 1px 1px rgba(0, 0, 0, 0.6),
-      /* no glow */
       0 0   0 rgba(255, 255, 255, 0);
   }
   50% {
     text-shadow:
       0 1px 1px rgba(0, 0, 0, 0.6),
-      /* gentle glow behind text */
       0 0   8px rgba(255, 255, 255, 0.3);
   }
 }
-
-
-  /*           CHAT FIX            */
 .chatbox__chatroom {
-  /* 1) Invisible but reserved gutter in modern browsers */
   overflow-y: auto !important;
   overflow-x: hidden !important;
   scrollbar-gutter: stable both-edges !important;
-
-  /* 2) Fallback always-on gutter */
   overflow-y: scroll !important;
-
-  /* 3) Overlay for WebKit */
   overflow-y: overlay !important;
-
-  /* 4) Thinner gutter in Firefox */
   scrollbar-width: thin !important;
 }
-
-/* Optional: style WebKit scrollbar thumb */
 .chatbox__chatroom::-webkit-scrollbar {
   width: 8px;
 }
-
-/* Disable all transitions inside the chatroom except on the input itself */
 .chatbox__chatroom,
 .chatbox__chatroom *:not(#chatbox__messages-create) {
 transition: none !important;
 }
-  /*           CHAT FIX            */
-
-
-  
 .chatbox-message__address {
 font-size: 11.5px !important;
 }
-
 .chatbox-message__content {
 font-size: 13.5px !important;
-
 }
-
-/* Explicitly cancel for chatbox avatars */
 img.chatbox-message__avatar:hover {
 transform: none !important;
 box-shadow: none !important;
 }
-
-
-  
 .chatbox__chatroom {
-background-color: #0c0c0f; /* Solid background color */
+background-color: #0c0c0f;
 position: relative;
 padding: 6px;
 border-radius: 8px;
 border: 0px solid var(--primary-accent);
 max-height: 60vh;
 line-height: 0.9 !important;
-background: url('https://ptpimg.me/wy2n6s.png') repeat; /* https://i.ibb.co/Ps1zwDBD/black-linen.png*/
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Black drop shadow */
+background: url('https://ptpimg.me/wy2n6s.png') repeat;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }
-
 @media (max-height: 500px) {
   .chatbox__chatroom {
     max-height: 50vh;
@@ -1159,7 +908,6 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Black drop shadow */
   background-image: none !important;
   box-shadow: none !important;
 }
-
 .chatbox-message,
 .chatbox-message:before {
   background-color: transparent;
@@ -1211,58 +959,39 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Black drop shadow */
   color: #ded7e8;
   transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
-
 .chatbox-message__time {
   padding: 0;
   font-size: 10px !important;
   color: rgba(170, 170, 170, 0.5019607843) !important;
 }
-
  a[href="/users/System"] {
   margin-right: 10px;
 }
-
  i[title="System Notification"] {
   display: none;
 }
-
-/* ===============================================================  
-    Hide any horizontal scrollbar in the chatroom 
-================================================================= */
-
 .chatbox__chatroom {
-overflow-x: hidden !important;   /* kill the horizontal track */
-overflow-y: auto   !important;   /* keep vertical scroll */
+overflow-x: hidden !important;
+overflow-y: auto   !important;
 }
-
-/* ===============================================================  
-    Force long words/URLs to wrap inside each message 
-================================================================= */
-
 .chatbox-message,
 .chatbox-message__content,
 .chatbox-message__header > div,
 .chatbox-message__content > div,
 div[style*="white-space: nowrap"] {
-white-space: pre-wrap      !important; /* honor newlines, then wrap */
-overflow-wrap: break-word  !important; /* break long words/URLs */
-word-break: break-word     !important; /* ensure wrapping on every browser */
+white-space: pre-wrap      !important;
+overflow-wrap: break-word  !important;
+word-break: break-word     !important;
 }
-
 .chatbox-message {
 margin-top: 1px !important;
 margin-bottom: 1px !important;
 }
-
 .chatbox-message__header {
-margin-top: 0.1px !important;     /* small space before the header */
-margin-bottom: 0.1px !important;  /* space after it before the message text */
-line-height: 15px !important; /* ~160% of the font size */
+margin-top: 0.1px !important;
+margin-bottom: 0.1px !important;
+line-height: 15px !important;
 }
-
-/* ===============================================================  
-    COLLAPSIBLE PANELS  
-================================================================= */
 details.panel {
   border: 1px solid var(--primary-accent);
   border-radius: 8px;
@@ -1298,23 +1027,17 @@ details.panel[open] .panel__heading::after {
   color: var(--text-primary);
   transition: max-height 0.3s ease;
 }
-
-/* ===============================================================
-    AVATAR GLOW EFFECTS & TOOLTIP
-================================================================= */
 img.user-search__avatar,
 img.user-stat-card__avatar,
 img.chatbox-message__avatar {
 position: relative;
 transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 img.user-search__avatar:hover,
 img.user-stat-card__avatar:hover,
 img.chatbox-message__avatar:hover {
-transform: scale(1.1); /* Enlarges the image by 10% */
+transform: scale(1.1);
 }
-
 img.user-search__avatar::after,
 img.user-stat-card__avatar::after,
 img.chatbox-message__avatar::after {
@@ -1333,13 +1056,11 @@ opacity: 0;
 transition: opacity 0.3s ease;
 pointer-events: none;
 }
-
 img.user-search__avatar:hover::after,
 img.user-stat-card__avatar:hover::after,
 img.chatbox-message__avatar:hover::after {
 opacity: 1;
 }
-
 .user-stat-card {
 background-color: var(--user-stat-card-bg);
 border-radius: 10px;
@@ -1348,11 +1069,6 @@ overflow: hidden;
 position: relative;
 padding: 7px;
 }
-
-
-/* ===============================================================  
-    ANIMATIONS  
-================================================================= */
 @keyframes subtlePulse {
   0%   { opacity: 0.95; }
   50%  { opacity: 1; }
@@ -1368,15 +1084,9 @@ padding: 7px;
 .cyber-icon.glow {
   animation: cyberFlicker 1.5s infinite;
 }
-/* ===============================================================  
-   Featured Torrents   
-================================================================= */
-
-/* dark overlay behind slides */
 .featured-carousel {
   position: relative;
 }
-
 .featured-carousel::before {
   content: "";
   position: absolute;
@@ -1384,17 +1094,12 @@ padding: 7px;
   width: 10000000%; height: 100%;
   background-color: rgba(0,0,0,0.4);
   pointer-events: none;
-  z-index: 0;             /* send it to the back */
+  z-index: 0; 
 }
-
-/* lift each slide (and its contents) above the overlay */
 .featured-carousel > li {
   position: relative;
   z-index: 1;
 }
-/* ===============================================================  
-    CYBER ICON STYLE  
-================================================================= */
 .cyber-icon {
   display: inline-block;
   width: 40px;
@@ -1411,21 +1116,15 @@ padding: 7px;
 .cyber-icon:hover {
   filter: drop-shadow(0 0 3px var(--cyber-cyan));
 }
-/* =========================================================
- panelV2
-========================================================= */
 :root{
-  --neon-blue : #41557F;                  /* base steel navy          */
-  --neon-soft : rgba(26,34,51,.90);       /* new highlight (#1A2233)  */
+  --neon-blue : #41557F;
+  --neon-soft : rgba(26,34,51,.90);
 }
-
 .panelV2:not(.blocks__news) > .panel__header:not(#chatbox_header){
   position: relative;
   padding-bottom: 1rem;
   border: none !important;
 }
-
-/* shared geometry & perf hints */
 .panelV2:not(.blocks__news) > .panel__header:not(#chatbox_header)::before,
 .panelV2:not(.blocks__news) > .panel__header:not(#chatbox_header)::after{
   content:"";
@@ -1435,16 +1134,12 @@ padding: 7px;
   pointer-events:none;
   will-change:transform,opacity;
 }
-
-/* 1 Ã¢â‚¬â€ static base */
 .panelV2:not(.blocks__news) > .panel__header:not(#chatbox_header)::before{
   background:var(--neon-blue);
   filter:drop-shadow(0 0 3px var(--neon-blue));
   opacity:.65;
   animation:baseBreath 6s linear infinite;
 }
-
-/* 2 Ã¢â‚¬â€ sweeping highlight (left Ã¢â€ â€™ right) */
 .panelV2:not(.blocks__news) > .panel__header:not(#chatbox_header)::after{
   width:300%;
   transform:translateX(-66.666%);
@@ -1457,57 +1152,36 @@ padding: 7px;
       transparent       85%);
   animation:sweep 8s cubic-bezier(.4,0,.6,1) infinite;
 }
-
-/* keyframes */
 @keyframes sweep      { to{ transform:translateX(0);} }
 @keyframes baseBreath { 0%,100%{opacity:.65;} 50%{opacity:.85;} }
-
-/* reduced-motion: keep static line, hide sweep */
 @media (prefers-reduced-motion: reduce){
   .panelV2:not(.blocks__news) > .panel__header:not(#chatbox_header)::after{
     animation:none; opacity:0;
   }
 }
-/*=============================================================================
- Turn off all transitions inside the Ã¢â‚¬Å“actionsÃ¢â‚¬Â column of your data tables
-=============================================================================*/
 .data-table__actions,
 .data-table__actions * {
 transition: none !important;
 }
-
-/* ===============================================================  
-   Latest Topics  
-================================================================= */
-
 .topic-listing__figure {
 display: flex          !important;
 align-items: center    !important;
-flex-shrink: 0         !important;  /* never collapse below this width */
-width: 7ch            !important;  /* adjust until your longest forum name fits */
-margin-right: 1rem     !important;  /* gutter before the title */
+flex-shrink: 0         !important;
+width: 7ch            !important;
+margin-right: 1rem     !important;
 }
-
-/* === 2) Tweak the caption so it wraps neatly (or ellipses) inside that box === */
 .topic-listing__forum {
-font-size: 0.85rem       !important;  /* shrink a bit so long names need fewer chars */
+font-size: 0.85rem       !important;
 line-height: 1.2em       !important;
-max-height: 2.4em        !important;  /* allow up to 2 lines */
+max-height: 2.4em        !important; 
 overflow: hidden         !important;
-text-overflow: ellipsis  !important;  /* show Ã¢â‚¬Å“Ã¢â‚¬Â¦Ã¢â‚¬Â if it really spills over */
+text-overflow: ellipsis  !important;
 white-space: normal      !important;
 }
-
 .topic-listing__icon {
 margin-bottom: 0.3rem     !important;
 }
-
-
-/* -------------------------------------------------------
-   SMALL PHONES: under 426px
-------------------------------------------------------- */
 @media (max-width: 426px) {
-  /* let everything shrink */
   .top-nav__left,
   .top-nav__right,
   .top-nav__main-menus,
@@ -1519,21 +1193,15 @@ margin-bottom: 0.3rem     !important;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  /* tighten padding */
   .content-container { padding: 0 8px; }
   .top-nav      { padding: 0 6px; }
   .top-nav__branding { font-size: 16px; margin-right: 4px; }
-  
-  /* collapse ratio bar & avatars */
   .top-nav__ratio-bar { display: none !important; }
   .post__avatar,
   .chatbox-message__avatar {
     width: 48px !important;
     height: 48px !important;
   }
-
-  /* let chat go full-width */
   .chatbox-message,
   .chatbox-message__content {
     max-width: 100% !important;
@@ -1541,6 +1209,3 @@ margin-bottom: 0.3rem     !important;
     overflow-wrap: anywhere !important;
   }
 }
-
-
-/*# sourceMappingURL=chat.css.map */

@@ -534,9 +534,13 @@
   .panel__body img:not(.profile__avatar) {
   transition: transform 0.35s ease-in-out;
   }
-  .panel__body img:not(.profile__avatar):not(.post__avatar):hover {
-    transform: scale(1.043);
-  }
+  .panel__body img
+  :not(.profile__avatar)
+  :not(.post__avatar)
+  :not(.user-stat-card__avatar):hover {
+  transform: scale(1.043);
+  transition: transform 0.2s ease-in-out;
+}
   .profile__avatar {
   display: inline-block;
   border-radius: 50%;

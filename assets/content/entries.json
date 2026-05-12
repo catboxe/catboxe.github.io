@@ -1,0 +1,203 @@
+{
+  "version": "1.9.4",
+  "generated": "2026-05-12T20:01:45.678Z",
+  "total_entries": 18,
+  "entries": [
+    {
+      "id": "entry-001",
+      "title": "Added matrix rain effect",
+      "date": "2026-05-10",
+      "content": "Implemented canvas-based digital rain background with configurable speed and density.",
+      "tags": ["feature", "canvas", "matrix"],
+      "author": "Other",
+      "likes": 12,
+      "comments": 3
+    },
+    {
+      "id": "entry-002",
+      "title": "Refactored routing system",
+      "date": "2026-05-09",
+      "content": "Replaced hash-based router with History API, added lazy loading for views.",
+      "tags": ["refactor", "router", "performance"],
+      "author": "Other",
+      "likes": 8,
+      "comments": 1
+    },
+    {
+      "id": "entry-003",
+      "title": "New color palette: neon amber",
+      "date": "2026-05-07",
+      "content": "Added --neon-amber variable and updated hover states for better contrast.",
+      "tags": ["css", "design"],
+      "author": "Other",
+      "likes": 15,
+      "comments": 4
+    },
+    {
+      "id": "entry-004",
+      "title": "Fixed mobile viewport issues",
+      "date": "2026-05-05",
+      "content": "Adjusted media queries for devices under 430px, improved touch targets.",
+      "tags": ["bugfix", "responsive"],
+      "author": "Other",
+      "likes": 6,
+      "comments": 2
+    },
+    {
+      "id": "entry-005",
+      "title": "Integrated busuanzi counter",
+      "date": "2026-05-03",
+      "content": "Added visitor statistics using busuanzi, visible in footer.",
+      "tags": ["feature", "stats"],
+      "author": "Other",
+      "likes": 4,
+      "comments": 0
+    },
+    {
+      "id": "entry-006",
+      "title": "Created archive page",
+      "date": "2026-05-01",
+      "content": "New /archive route listing old projects and resources from cache.json.",
+      "tags": ["feature", "archive"],
+      "author": "Other",
+      "likes": 7,
+      "comments": 1
+    },
+    {
+      "id": "entry-007",
+      "title": "Optimized font loading",
+      "date": "2026-04-28",
+      "content": "Preload Fira Code and JetBrains Mono, fallback to monospace.",
+      "tags": ["performance", "fonts"],
+      "author": "Other",
+      "likes": 5,
+      "comments": 0
+    },
+    {
+      "id": "entry-008",
+      "title": "Added Discord invite widget",
+      "date": "2026-04-25",
+      "content": "Embedded gateway preview with member count and online status.",
+      "tags": ["feature", "discord"],
+      "author": "Other",
+      "likes": 22,
+      "comments": 7
+    },
+    {
+      "id": "entry-009",
+      "title": "Service worker registration",
+      "date": "2026-04-22",
+      "content": "Enabled offline fallback page and asset caching for critical resources.",
+      "tags": ["pwa", "cache"],
+      "author": "Other",
+      "likes": 9,
+      "comments": 2
+    },
+    {
+      "id": "entry-010",
+      "title": "Glitch animation on hover",
+      "date": "2026-04-20",
+      "content": "Applied subtle glitch effect to menu links when hovered.",
+      "tags": ["css", "animation"],
+      "author": "Other",
+      "likes": 11,
+      "comments": 1
+    },
+    {
+      "id": "entry-011",
+      "title": "Updated README and docs",
+      "date": "2026-04-18",
+      "content": "Added project structure explanation and setup instructions.",
+      "tags": ["docs"],
+      "author": "Other",
+      "likes": 3,
+      "comments": 0
+    },
+    {
+      "id": "entry-012",
+      "title": "Bumped dependencies",
+      "date": "2026-04-15",
+      "content": "Updated webpack, babel, and postcss to latest versions.",
+      "tags": ["maintenance"],
+      "author": "Other",
+      "likes": 2,
+      "comments": 0
+    },
+    {
+      "id": "entry-013",
+      "title": "Experimental WebGL background",
+      "date": "2026-04-12",
+      "content": "Three.js test scene behind terminal panel (disabled by default).",
+      "tags": ["experiment", "webgl"],
+      "author": "Other",
+      "likes": 14,
+      "comments": 3
+    },
+    {
+      "id": "entry-014",
+      "title": "Fixed scroll restoration",
+      "date": "2026-04-10",
+      "content": "Router now saves and restores scroll position on navigation.",
+      "tags": ["bugfix", "router"],
+      "author": "Other",
+      "likes": 4,
+      "comments": 0
+    },
+    {
+      "id": "entry-015",
+      "title": "Added terminal sound effects",
+      "date": "2026-04-07",
+      "content": "Optional keystroke clicks and beeps (disabled by default).",
+      "tags": ["feature", "audio"],
+      "author": "Other",
+      "likes": 18,
+      "comments": 5
+    },
+    {
+      "id": "entry-016",
+      "title": "Reddit scraping module (internal)",
+      "date": "2026-04-05",
+      "content": "Tool to fetch domain discussions from r/domains (for Domain Hunter).",
+      "tags": ["tool", "scraper"],
+      "author": "Other",
+      "likes": 6,
+      "comments": 0
+    },
+    {
+      "id": "entry-017",
+      "title": "Cache invalidation strategy",
+      "date": "2026-04-02",
+      "content": "Implemented stale-while-revalidate with background updates.",
+      "tags": ["cache", "performance"],
+      "author": "Other",
+      "likes": 7,
+      "comments": 1
+    },
+    {
+      "id": "entry-018",
+      "title": "Launch of cyberpunk theme",
+      "date": "2026-03-30",
+      "content": "Complete redesign with neon borders, matrix green, and glassmorphism.",
+      "tags": ["launch", "design"],
+      "author": "Other",
+      "likes": 31,
+      "comments": 12
+    }
+  ],
+  "pagination": {
+    "per_page": 10,
+    "current_page": 1,
+    "total_pages": 2
+  },
+  "tags_cloud": [
+    {"tag": "feature", "count": 6},
+    {"tag": "bugfix", "count": 2},
+    {"tag": "performance", "count": 2},
+    {"tag": "cache", "count": 2},
+    {"tag": "css", "count": 2},
+    {"tag": "router", "count": 2},
+    {"tag": "discord", "count": 1},
+    {"tag": "webgl", "count": 1},
+    {"tag": "audio", "count": 1}
+  ]
+}

@@ -1,0 +1,427 @@
+{
+  "cache_metadata": {
+    "version": "4.1.7",
+    "build_id": "cyberpunk_2026_05_12_19_45_33",
+    "generated_at": "2026-05-12T19:45:33.921Z",
+    "expires_at": "2026-05-19T19:45:33.921Z",
+    "cache_strategy": "stale-while-revalidate",
+    "stale_ttl": 259200,
+    "compression": "brotli",
+    "origin": "https://github.io",
+    "repository": "cyberpunk-frontend"
+  },
+  "asset_groups": {
+    "critical_css": {
+      "ttl": 604800,
+      "preload": true,
+      "entries": [
+        {
+          "url": "/assets/css/core.min.css",
+          "hash": "sha384-9a8f3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+          "size_bytes": 124567,
+          "fetched_at": "2026-05-12T19:40:12.123Z",
+          "integrity": "sha384-abc123def4567890",
+          "fallback": "/assets/css/fallback.css"
+        },
+        {
+          "url": "/assets/css/terminal.css",
+          "hash": "sha384-7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f",
+          "size_bytes": 89432,
+          "fetched_at": "2026-05-12T19:40:15.456Z",
+          "integrity": "sha384-fedcba9876543210",
+          "fallback": null
+        },
+        {
+          "url": "/assets/css/matrix-effects.css",
+          "hash": "sha384-1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r",
+          "size_bytes": 45210,
+          "fetched_at": "2026-05-12T19:40:17.789Z",
+          "integrity": "sha384-0987654321fedcba",
+          "fallback": "/assets/css/no-effects.css"
+        }
+      ]
+    },
+    "runtime_scripts": {
+      "ttl": 86400,
+      "preload": false,
+      "entries": [
+        {
+          "url": "/assets/js/runtime.js",
+          "hash": "sha384-5d41402abc4b2a76b9719d911017c592",
+          "size_bytes": 98765,
+          "fetched_at": "2026-05-12T19:40:05.000Z",
+          "chunk_id": "runtime",
+          "dependencies": [],
+          "async": false,
+          "defer": false
+        },
+        {
+          "url": "/assets/js/loader.js",
+          "hash": "sha384-7d793037a0760186574b0282f2f461e",
+          "size_bytes": 45123,
+          "fetched_at": "2026-05-12T19:40:08.123Z",
+          "chunk_id": "loader",
+          "dependencies": ["runtime.js"],
+          "async": false,
+          "defer": true
+        },
+        {
+          "url": "/assets/js/app.js",
+          "hash": "sha384-098f6bcd4621d373cade4e832627b4f6",
+          "size_bytes": 234567,
+          "fetched_at": "2026-05-12T19:40:11.456Z",
+          "chunk_id": "app",
+          "dependencies": ["runtime.js", "loader.js"],
+          "async": false,
+          "defer": false
+        },
+        {
+          "url": "/assets/js/vendor.bundle.js",
+          "hash": "sha384-1234567890abcdef1234567890abcdef",
+          "size_bytes": 567890,
+          "fetched_at": "2026-05-12T19:40:14.789Z",
+          "chunk_id": "vendor",
+          "dependencies": [],
+          "async": true,
+          "defer": true
+        }
+      ]
+    },
+    "data_payloads": {
+      "ttl": 3600,
+      "preload": false,
+      "entries": [
+        {
+          "url": "/assets/data/routes.json",
+          "hash": "sha384-abcdef1234567890abcdef1234567890",
+          "size_bytes": 12345,
+          "fetched_at": "2026-05-12T19:41:22.334Z",
+          "version": "2.1.0"
+        },
+        {
+          "url": "/assets/data/cache.json",
+          "hash": "sha384-9a8f3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+          "size_bytes": 98765,
+          "fetched_at": "2026-05-12T19:41:25.556Z",
+          "version": "4.1.7"
+        },
+        {
+          "url": "/assets/content/archive.json",
+          "hash": "sha384-1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+          "size_bytes": 456789,
+          "fetched_at": "2026-05-12T19:41:28.777Z",
+          "version": "3.0.2"
+        },
+        {
+          "url": "/assets/content/entries.json",
+          "hash": "sha384-7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
+          "size_bytes": 567890,
+          "fetched_at": "2026-05-12T19:41:31.888Z",
+          "version": "1.9.4"
+        }
+      ]
+    },
+    "images": {
+      "ttl": 2592000,
+      "preload": false,
+      "entries": [
+        {
+          "url": "/assets/img/backgrounds/cyber-grid.webp",
+          "hash": "sha384-7d793037a0760186574b0282f2f461e",
+          "size_bytes": 234567,
+          "fetched_at": "2026-05-12T19:42:01.111Z",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "/assets/img/icons/terminal.svg",
+          "hash": "sha384-098f6bcd4621d373cade4e832627b4f6",
+          "size_bytes": 3456,
+          "fetched_at": "2026-05-12T19:42:03.222Z",
+          "width": 64,
+          "height": 64
+        },
+        {
+          "url": "/assets/img/logos/neon-logo.png",
+          "hash": "sha384-1234567890abcdef1234567890abcdef",
+          "size_bytes": 78901,
+          "fetched_at": "2026-05-12T19:42:05.333Z",
+          "width": 512,
+          "height": 512
+        }
+      ]
+    },
+    "fonts": {
+      "ttl": 604800,
+      "preload": true,
+      "entries": [
+        {
+          "url": "/assets/fonts/fira-code.woff2",
+          "hash": "sha384-abcdef1234567890abcdef1234567890",
+          "size_bytes": 123456,
+          "fetched_at": "2026-05-12T19:42:10.444Z",
+          "family": "Fira Code",
+          "style": "monospace"
+        },
+        {
+          "url": "/assets/fonts/jetbrains-mono.woff2",
+          "hash": "sha384-9a8f3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+          "size_bytes": 98765,
+          "fetched_at": "2026-05-12T19:42:12.555Z",
+          "family": "JetBrains Mono",
+          "style": "monospace"
+        }
+      ]
+    }
+  },
+  "preload_manifest": {
+    "critical_assets": [
+      "/assets/css/core.min.css",
+      "/assets/js/runtime.js",
+      "/assets/fonts/fira-code.woff2"
+    ],
+    "on_load_assets": [
+      "/assets/js/app.js",
+      "/assets/data/routes.json",
+      "/assets/css/terminal.css"
+    ],
+    "deferred_assets": [
+      "/assets/js/vendor.bundle.js",
+      "/assets/img/backgrounds/cyber-grid.webp"
+    ]
+  },
+  "cache_invalidation": {
+    "active_keys": [
+      "core.min.css",
+      "runtime.js",
+      "app.js",
+      "routes.json",
+      "archive.json",
+      "entries.json"
+    ],
+    "pending_invalidation": [],
+    "last_full_purge": "2026-05-10T00:00:00.000Z",
+    "next_scheduled_purge": "2026-05-17T00:00:00.000Z"
+  },
+  "service_worker": {
+    "enabled": true,
+    "scope": "/",
+    "cache_name": "cyberpunk-cache-v4",
+    "offline_fallback": "/offline.html",
+    "routes_to_cache": [
+      "/",
+      "/index.html",
+      "/assets/css/*",
+      "/assets/js/*",
+      "/assets/data/*",
+      "/assets/content/*",
+      "/assets/img/*",
+      "/assets/fonts/*"
+    ],
+    "ignore_parameters": ["utm_source", "utm_medium", "ref"]
+  },
+  "feature_flags": {
+    "enable_webgl": true,
+    "enable_audio_api": false,
+    "enable_webgpu": false,
+    "use_experimental_css": true,
+    "preconnect_origins": [
+      "https://fonts.googleapis.com",
+      "https://cdnjs.cloudflare.com"
+    ],
+    "dns_prefetch": [
+      "https://api.github.com",
+      "https://raw.githubusercontent.com"
+    ]
+  },
+  "performance_budgets": {
+    "max_css_size": 150000,
+    "max_js_size": 500000,
+    "max_image_size": 2500000,
+    "max_total_page_weight": 3500000,
+    "time_to_interactive_ms": 1800,
+    "first_contentful_paint_ms": 800
+  },
+  "error_handling": {
+    "retry_count": 3,
+    "retry_delay_ms": 1000,
+    "fallback_behavior": "show_offline_page",
+    "error_reporting_endpoint": "https://github.io/api/log",
+    "sample_rate": 0.1
+  },
+  "cache_entries_detailed": [
+    {
+      "key": "asset:css:core.min.css",
+      "value_hash": "9a8f3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+      "size_bytes": 124567,
+      "timestamp": "2026-05-12T19:40:12.123Z",
+      "ttl": 604800,
+      "tags": ["css", "critical", "render-blocking"]
+    },
+    {
+      "key": "asset:css:terminal.css",
+      "value_hash": "7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
+      "size_bytes": 89432,
+      "timestamp": "2026-05-12T19:40:15.456Z",
+      "ttl": 604800,
+      "tags": ["css", "non-critical"]
+    },
+    {
+      "key": "asset:js:runtime.js",
+      "value_hash": "5d41402abc4b2a76b9719d911017c592",
+      "size_bytes": 98765,
+      "timestamp": "2026-05-12T19:40:05.000Z",
+      "ttl": 86400,
+      "tags": ["js", "runtime", "core"]
+    },
+    {
+      "key": "asset:js:loader.js",
+      "value_hash": "7d793037a0760186574b0282f2f461e",
+      "size_bytes": 45123,
+      "timestamp": "2026-05-12T19:40:08.123Z",
+      "ttl": 86400,
+      "tags": ["js", "loader"]
+    },
+    {
+      "key": "asset:js:app.js",
+      "value_hash": "098f6bcd4621d373cade4e832627b4f6",
+      "size_bytes": 234567,
+      "timestamp": "2026-05-12T19:40:11.456Z",
+      "ttl": 86400,
+      "tags": ["js", "app", "main"]
+    },
+    {
+      "key": "asset:js:vendor.bundle.js",
+      "value_hash": "1234567890abcdef1234567890abcdef",
+      "size_bytes": 567890,
+      "timestamp": "2026-05-12T19:40:14.789Z",
+      "ttl": 86400,
+      "tags": ["js", "vendor", "async"]
+    },
+    {
+      "key": "data:routes.json",
+      "value_hash": "abcdef1234567890abcdef1234567890",
+      "size_bytes": 12345,
+      "timestamp": "2026-05-12T19:41:22.334Z",
+      "ttl": 3600,
+      "tags": ["data", "routes", "dynamic"]
+    },
+    {
+      "key": "data:cache.json",
+      "value_hash": "9a8f3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+      "size_bytes": 98765,
+      "timestamp": "2026-05-12T19:41:25.556Z",
+      "ttl": 3600,
+      "tags": ["data", "cache", "meta"]
+    },
+    {
+      "key": "content:archive.json",
+      "value_hash": "1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+      "size_bytes": 456789,
+      "timestamp": "2026-05-12T19:41:28.777Z",
+      "ttl": 3600,
+      "tags": ["content", "archive", "long-term"]
+    },
+    {
+      "key": "content:entries.json",
+      "value_hash": "7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
+      "size_bytes": 567890,
+      "timestamp": "2026-05-12T19:41:31.888Z",
+      "ttl": 3600,
+      "tags": ["content", "entries", "feed"]
+    },
+    {
+      "key": "image:background:cyber-grid.webp",
+      "value_hash": "7d793037a0760186574b0282f2f461e",
+      "size_bytes": 234567,
+      "timestamp": "2026-05-12T19:42:01.111Z",
+      "ttl": 2592000,
+      "tags": ["image", "background", "large"]
+    },
+    {
+      "key": "image:icon:terminal.svg",
+      "value_hash": "098f6bcd4621d373cade4e832627b4f6",
+      "size_bytes": 3456,
+      "timestamp": "2026-05-12T19:42:03.222Z",
+      "ttl": 2592000,
+      "tags": ["image", "icon", "svg"]
+    },
+    {
+      "key": "image:logo:neon-logo.png",
+      "value_hash": "1234567890abcdef1234567890abcdef",
+      "size_bytes": 78901,
+      "timestamp": "2026-05-12T19:42:05.333Z",
+      "ttl": 2592000,
+      "tags": ["image", "logo", "png"]
+    },
+    {
+      "key": "font:fira-code.woff2",
+      "value_hash": "abcdef1234567890abcdef1234567890",
+      "size_bytes": 123456,
+      "timestamp": "2026-05-12T19:42:10.444Z",
+      "ttl": 604800,
+      "tags": ["font", "woff2", "monospace"]
+    },
+    {
+      "key": "font:jetbrains-mono.woff2",
+      "value_hash": "9a8f3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+      "size_bytes": 98765,
+      "timestamp": "2026-05-12T19:42:12.555Z",
+      "ttl": 604800,
+      "tags": ["font", "woff2", "monospace"]
+    }
+  ],
+  "cache_headers": {
+    "default": "public, max-age=86400, stale-while-revalidate=259200",
+    "css": "public, max-age=604800, immutable",
+    "js": "public, max-age=86400, stale-while-revalidate=43200",
+    "images": "public, max-age=2592000, immutable",
+    "fonts": "public, max-age=604800, immutable",
+    "json": "public, max-age=3600, stale-while-revalidate=1800"
+  },
+  "cache_warming": {
+    "enabled": true,
+    "urls": [
+      "/",
+      "/index.html",
+      "/assets/css/core.min.css",
+      "/assets/js/runtime.js",
+      "/assets/js/app.js",
+      "/assets/data/routes.json"
+    ],
+    "user_agent": "CyberpunkCacheWarming/1.0",
+    "concurrency": 2
+  },
+  "cache_statistics": {
+    "hit_rate": 0.87,
+    "miss_rate": 0.13,
+    "stale_hits": 0.04,
+    "total_requests": 124567,
+    "cached_bytes": 284567890,
+    "bandwidth_saved_mb": 271.4,
+    "last_updated": "2026-05-12T19:45:33.921Z"
+  },
+  "cache_variants": {
+    "enabled": true,
+    "dimensions": ["viewport_width", "device_pixel_ratio", "color_scheme"],
+    "viewport_breakpoints": [375, 768, 1024, 1440],
+    "dpr_breakpoints": [1, 2, 3]
+  },
+  "cache_purge_rules": [
+    {
+      "condition": "max_age_exceeded",
+      "action": "revalidate",
+      "priority": 1
+    },
+    {
+      "condition": "version_mismatch",
+      "action": "invalidate",
+      "priority": 0
+    },
+    {
+      "condition": "manual_request",
+      "action": "delete",
+      "priority": 2
+    }
+  ]
+}

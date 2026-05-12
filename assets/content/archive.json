@@ -1,0 +1,231 @@
+{
+  "archive_metadata": {
+    "version": "2.3.0",
+    "generated": "2026-05-12T19:55:22.334Z",
+    "total_entries": 42,
+    "last_updated": "2026-05-10T14:20:00Z",
+    "archive_policy": "keep_forever"
+  },
+  "categories": [
+    "old-projects",
+    "resources",
+    "scripts",
+    "configs",
+    "discord-archives",
+    "experiments"
+  ],
+  "entries": [
+    {
+      "id": "arc-001",
+      "title": "Old terminal dashboard v0.1",
+      "date": "2024-03-15",
+      "category": "old-projects",
+      "description": "First prototype of the terminal UI, before the neon redesign.",
+      "tags": ["terminal", "prototype", "abandoned"],
+      "url": "/archive/terminal-v0.1.html",
+      "relevance": "low",
+      "size_kb": 234,
+      "deprecated": true
+    },
+    {
+      "id": "arc-002",
+      "title": "Matrix rain canvas snippet",
+      "date": "2024-04-22",
+      "category": "scripts",
+      "description": "Pure JS matrix digital rain effect used in early versions.",
+      "tags": ["canvas", "matrix", "animation"],
+      "url": "/archive/matrix-rain.js",
+      "relevance": "medium",
+      "size_kb": 12,
+      "deprecated": false
+    },
+    {
+      "id": "arc-003",
+      "title": "Discord bot framework (deprecated)",
+      "date": "2024-06-10",
+      "category": "discord-archives",
+      "description": "Old Node.js bot with command handler and music player.",
+      "tags": ["discord", "bot", "nodejs"],
+      "url": "/archive/discord-bot-legacy.zip",
+      "relevance": "low",
+      "size_kb": 1240,
+      "deprecated": true
+    },
+    {
+      "id": "arc-004",
+      "title": "Cyberpunk color palette collection",
+      "date": "2024-07-05",
+      "category": "resources",
+      "description": "HEX and RGB values for neon themes, including original glow formulas.",
+      "tags": ["css", "design", "colors"],
+      "url": "/archive/cyberpalette.json",
+      "relevance": "high",
+      "size_kb": 8,
+      "deprecated": false
+    },
+    {
+      "id": "arc-005",
+      "title": "Old archive crawler script",
+      "date": "2024-08-19",
+      "category": "scripts",
+      "description": "Python script to fetch and index wayback machine snapshots.",
+      "tags": ["python", "crawler", "archive"],
+      "url": "/archive/wayback-crawler.py",
+      "relevance": "medium",
+      "size_kb": 45,
+      "deprecated": false
+    },
+    {
+      "id": "arc-006",
+      "title": "Nginx config snippets for static hosting",
+      "date": "2024-09-30",
+      "category": "configs",
+      "description": "Various locations, caching rules, and security headers.",
+      "tags": ["nginx", "config", "hosting"],
+      "url": "/archive/nginx-snippets.conf",
+      "relevance": "high",
+      "size_kb": 6,
+      "deprecated": false
+    },
+    {
+      "id": "arc-007",
+      "title": "Initial GitHub Pages setup guide",
+      "date": "2024-10-12",
+      "category": "resources",
+      "description": "Step-by-step for setting up custom domain and SSL.",
+      "tags": ["github", "pages", "tutorial"],
+      "url": "/archive/gh-pages-setup.md",
+      "relevance": "high",
+      "size_kb": 28,
+      "deprecated": false
+    },
+    {
+      "id": "arc-008",
+      "title": "Old routing experiment with hashbang",
+      "date": "2024-11-05",
+      "category": "experiments",
+      "description": "SPA routing using location.hash before History API.",
+      "tags": ["frontend", "routing", "history"],
+      "url": "/archive/hash-router-demo.html",
+      "relevance": "low",
+      "size_kb": 56,
+      "deprecated": true
+    },
+    {
+      "id": "arc-009",
+      "title": "Discord server backup (2024 Q3)",
+      "date": "2024-10-01",
+      "category": "discord-archives",
+      "description": "Channel structures, roles, and permissions backup.",
+      "tags": ["discord", "backup", "json"],
+      "url": "/archive/discord-backup-2024q3.json",
+      "relevance": "medium",
+      "size_kb": 342,
+      "deprecated": false
+    },
+    {
+      "id": "arc-010",
+      "title": "Terminal easter eggs collection",
+      "date": "2025-01-18",
+      "category": "scripts",
+      "description": "Fun ascii art and hidden commands for the terminal.",
+      "tags": ["easter-eggs", "ascii", "fun"],
+      "url": "/archive/easter-eggs.js",
+      "relevance": "high",
+      "size_kb": 67,
+      "deprecated": false
+    },
+    {
+      "id": "arc-011",
+      "title": "Old portfolio design (2023)",
+      "date": "2023-12-01",
+      "category": "old-projects",
+      "description": "Previous version of personal site, before cyberpunk theme.",
+      "tags": ["portfolio", "legacy", "html"],
+      "url": "/archive/portfolio-2023.html",
+      "relevance": "low",
+      "size_kb": 890,
+      "deprecated": true
+    },
+    {
+      "id": "arc-012",
+      "title": "Build scripts for webpack v4",
+      "date": "2024-05-20",
+      "category": "configs",
+      "description": "Webpack configs, loaders, and plugins used historically.",
+      "tags": ["webpack", "build", "config"],
+      "url": "/archive/webpack-old-configs.zip",
+      "relevance": "medium",
+      "size_kb": 156,
+      "deprecated": true
+    },
+    {
+      "id": "arc-013",
+      "title": "Audio visualizer experiment",
+      "date": "2024-12-11",
+      "category": "experiments",
+      "description": "Three.js based music visualizer (unfinished).",
+      "tags": ["webgl", "audio", "threejs"],
+      "url": "/archive/audio-viz-demo.html",
+      "relevance": "medium",
+      "size_kb": 2340,
+      "deprecated": false
+    },
+    {
+      "id": "arc-014",
+      "title": "CSS-only glitch effect library",
+      "date": "2025-02-14",
+      "category": "resources",
+      "description": "Pure CSS glitch animations, ready to use.",
+      "tags": ["css", "glitch", "effects"],
+      "url": "/archive/glitch.css",
+      "relevance": "high",
+      "size_kb": 5,
+      "deprecated": false
+    },
+    {
+      "id": "arc-015",
+      "title": "Old command handler for IRC bot",
+      "date": "2023-08-22",
+      "category": "discord-archives",
+      "description": "Pre-Discord era, IRC bot written in Perl.",
+      "tags": ["irc", "perl", "bot"],
+      "url": "/archive/irc-bot-legacy.pl",
+      "relevance": "low",
+      "size_kb": 78,
+      "deprecated": true
+    }
+  ],
+  "archive_tree": {
+    "by_year": {
+      "2023": ["arc-001", "arc-015"],
+      "2024": ["arc-002", "arc-003", "arc-004", "arc-005", "arc-006", "arc-007", "arc-008", "arc-009", "arc-012", "arc-013"],
+      "2025": ["arc-010", "arc-014"]
+    },
+    "by_category": {
+      "old-projects": ["arc-001", "arc-011"],
+      "scripts": ["arc-002", "arc-005", "arc-010"],
+      "discord-archives": ["arc-003", "arc-009", "arc-015"],
+      "resources": ["arc-004", "arc-007", "arc-014"],
+      "configs": ["arc-006", "arc-012"],
+      "experiments": ["arc-008", "arc-013"]
+    }
+  },
+  "search_index": {
+    "keywords": {
+      "terminal": ["arc-001", "arc-010"],
+      "matrix": ["arc-002"],
+      "discord": ["arc-003", "arc-009", "arc-015"],
+      "css": ["arc-004", "arc-014"],
+      "nginx": ["arc-006"],
+      "github": ["arc-007"],
+      "router": ["arc-008"],
+      "webgl": ["arc-013"]
+    }
+  },
+  "pagination": {
+    "per_page": 10,
+    "current_page": 1,
+    "total_pages": 2
+  }
+}

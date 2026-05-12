@@ -1,0 +1,354 @@
+{
+  "version": "3.1.4",
+  "generated_at": "2026-05-12T19:50:10.123Z",
+  "base_path": "/",
+  "default_route": "home",
+  "not_found_route": "404",
+  "routes": [
+    {
+      "id": "home",
+      "path": "/",
+      "name": "Terminal Home",
+      "component": "views/terminal-home.js",
+      "lazy_load": false,
+      "prefetch": true,
+      "cache_ttl": 3600,
+      "meta": {
+        "title": "True :: Terminal",
+        "description": "Cyberpunk frontend terminal interface",
+        "keywords": ["terminal", "cyberpunk", "matrix", "frontend"],
+        "transition": "fade",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": [
+        "/assets/content/entries.json",
+        "/assets/content/archive.json"
+      ],
+      "api_endpoints": [],
+      "animation": "matrix-rain",
+      "background": "cyber-grid"
+    },
+    {
+      "id": "profile",
+      "path": "/profile",
+      "name": "User Profile",
+      "component": "views/profile.js",
+      "lazy_load": true,
+      "prefetch": false,
+      "cache_ttl": 300,
+      "meta": {
+        "title": "Profile | True",
+        "description": "User profile and settings",
+        "keywords": ["profile", "user", "settings"],
+        "transition": "slide-left",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": [],
+      "api_endpoints": ["/api/user/profile"],
+      "animation": "glitch"
+    },
+    {
+      "id": "bio",
+      "path": "/bio",
+      "name": "Biography / CV",
+      "component": "views/bio.js",
+      "lazy_load": true,
+      "prefetch": false,
+      "cache_ttl": 86400,
+      "meta": {
+        "title": "Bio | True",
+        "description": "Biography, skills, and experience",
+        "keywords": ["bio", "cv", "resume", "developer"],
+        "transition": "fade-up",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": ["/assets/content/bio.yaml"],
+      "api_endpoints": [],
+      "animation": "typing"
+    },
+    {
+      "id": "gateway",
+      "path": "/gateway",
+      "name": "Gateway / Discord",
+      "component": "views/gateway.js",
+      "lazy_load": true,
+      "prefetch": true,
+      "cache_ttl": 1800,
+      "meta": {
+        "title": "Gateway | Join Discord",
+        "description": "Community gateway and Discord invite",
+        "keywords": ["discord", "gateway", "community"],
+        "transition": "zoom",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": [],
+      "api_endpoints": ["/api/discord/invite"],
+      "animation": "neon-pulse"
+    },
+    {
+      "id": "archive",
+      "path": "/archive",
+      "name": "Archive",
+      "component": "views/archive.js",
+      "lazy_load": true,
+      "prefetch": false,
+      "cache_ttl": 7200,
+      "meta": {
+        "title": "Archive | Old resources",
+        "description": "Archived links, projects, and resources",
+        "keywords": ["archive", "old", "resources", "projects"],
+        "transition": "fade",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": ["/assets/content/archive.json"],
+      "api_endpoints": [],
+      "animation": "static"
+    },
+    {
+      "id": "entries",
+      "path": "/entries",
+      "name": "Journal Entries",
+      "component": "views/entries.js",
+      "lazy_load": true,
+      "prefetch": false,
+      "cache_ttl": 3600,
+      "meta": {
+        "title": "Journal | True",
+        "description": "Daily logs and technical notes",
+        "keywords": ["journal", "log", "notes", "dev"],
+        "transition": "slide-up",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": ["/assets/content/entries.json"],
+      "api_endpoints": [],
+      "animation": "matrix-rain"
+    },
+    {
+      "id": "vault",
+      "path": "/vault",
+      "name": "Vault",
+      "component": "views/vault.js",
+      "lazy_load": true,
+      "prefetch": true,
+      "cache_ttl": 300,
+      "meta": {
+        "title": "Vault | Secure area",
+        "description": "Protected resources and tools",
+        "keywords": ["vault", "tools", "resources"],
+        "transition": "glitch",
+        "requires_auth": false,
+        "roles_allowed": ["user", "admin"]
+      },
+      "data_dependencies": ["/assets/data/vault-index.json"],
+      "api_endpoints": ["/api/vault/list"],
+      "animation": "hacker"
+    },
+    {
+      "id": "404",
+      "path": "/404",
+      "name": "Not Found",
+      "component": "views/not-found.js",
+      "lazy_load": false,
+      "prefetch": false,
+      "cache_ttl": 86400,
+      "meta": {
+        "title": "404 - Signal Lost",
+        "description": "Page not found in the matrix",
+        "keywords": ["404", "error", "not found"],
+        "transition": "fade",
+        "requires_auth": false,
+        "roles_allowed": ["guest", "user", "admin"]
+      },
+      "data_dependencies": [],
+      "api_endpoints": [],
+      "animation": "static"
+    }
+  ],
+  "nested_routes": [
+    {
+      "parent": "profile",
+      "children": [
+        {
+          "id": "profile-edit",
+          "path": "/profile/edit",
+          "name": "Edit Profile",
+          "component": "views/profile-edit.js",
+          "lazy_load": true,
+          "meta": {
+            "title": "Edit Profile",
+            "requires_auth": false
+          }
+        },
+        {
+          "id": "profile-preferences",
+          "path": "/profile/preferences",
+          "name": "Preferences",
+          "component": "views/preferences.js",
+          "lazy_load": true,
+          "meta": {
+            "title": "Preferences",
+            "requires_auth": false
+          }
+        }
+      ]
+    },
+    {
+      "parent": "vault",
+      "children": [
+        {
+          "id": "vault-tools",
+          "path": "/vault/tools",
+          "name": "Vault Tools",
+          "component": "views/vault-tools.js",
+          "lazy_load": true,
+          "meta": {
+            "title": "Vault Tools",
+            "requires_auth": false
+          }
+        },
+        {
+          "id": "vault-backups",
+          "path": "/vault/backups",
+          "name": "Backups",
+          "component": "views/vault-backups.js",
+          "lazy_load": true,
+          "meta": {
+            "title": "Backup Archives",
+            "requires_auth": false
+          }
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "from": "/old-home",
+      "to": "/",
+      "status": 301,
+      "regex": false
+    },
+    {
+      "from": "/discord",
+      "to": "/gateway",
+      "status": 302,
+      "regex": false
+    },
+    {
+      "from": "/github",
+      "to": "https://github.com/True",
+      "status": 301,
+      "external": true
+    },
+    {
+      "from": "^/user/([a-z0-9]+)$",
+      "to": "/profile?id=$1",
+      "status": 302,
+      "regex": true
+    }
+  ],
+  "route_guards": [
+    {
+      "name": "authGuard",
+      "routes": ["/vault", "/vault/*", "/profile/edit"],
+      "redirect_to": "/",
+      "condition": "!user.isLoggedIn"
+    },
+    {
+      "name": "adminGuard",
+      "routes": ["/admin", "/admin/*"],
+      "redirect_to": "/gateway",
+      "condition": "user.role !== 'admin'"
+    }
+  ],
+  "transition_defaults": {
+    "duration_ms": 300,
+    "easing": "cubic-bezier(0.2, 0.9, 0.4, 1.1)",
+    "mode": "out-in"
+  },
+  "prefetch_strategy": {
+    "on_hover": true,
+    "on_viewport_enter": true,
+    "max_prefetch_count": 3,
+    "exclude_paths": ["/vault/*", "/profile/edit"]
+  },
+  "route_metadata_extra": {
+    "home": {
+      "icon": "🏠",
+      "color": "#0ff",
+      "order": 0,
+      "badge": null,
+      "tags": ["main"]
+    },
+    "profile": {
+      "icon": "👤",
+      "color": "#f0f",
+      "order": 1,
+      "badge": "new",
+      "tags": ["user"]
+    },
+    "bio": {
+      "icon": "📄",
+      "color": "#ff0",
+      "order": 2,
+      "badge": null,
+      "tags": ["info"]
+    },
+    "gateway": {
+      "icon": "🚪",
+      "color": "#0f0",
+      "order": 3,
+      "badge": "hot",
+      "tags": ["community"]
+    },
+    "archive": {
+      "icon": "🗄️",
+      "color": "#aaf",
+      "order": 4,
+      "badge": "updated",
+      "tags": ["content"]
+    },
+    "entries": {
+      "icon": "📓",
+      "color": "#f90",
+      "order": 5,
+      "badge": "5 new",
+      "tags": ["blog"]
+    },
+    "vault": {
+      "icon": "🔒",
+      "color": "#c0c",
+      "order": 6,
+      "badge": "protected",
+      "tags": ["secure"]
+    }
+  },
+  "query_parameter_mapping": {
+    "page": "pageNum",
+    "sort": "sortBy",
+    "filter": "filterTags",
+    "search": "searchQuery"
+  },
+  "route_history_limit": 50,
+  "scroll_restoration": "auto",
+  "error_handling": {
+    "route_load_failure": {
+      "redirect": "/404",
+      "notify": true
+    },
+    "guard_failure": {
+      "redirect": "/gateway",
+      "notify": false
+    }
+  },
+  "experimental": {
+    "view_transitions_api": true,
+    "shared_element_transitions": false,
+    "preload_links": true
+  }
+}

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# cross-seed-installer.sh - Com criação opcional da pasta qbit_link
+# cross-seed-installer.sh - Com criação de pastas essenciais (output e qbit_link)
 
 set -euo pipefail
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; CYAN='\033[0;36m'; NC='\033[0m'
 
-# Detecta home real
+# Detecta home real (normalmente /config)
 REAL_HOME=$(getent passwd "$(whoami)" | cut -d: -f6)
 [ -z "$REAL_HOME" ] && REAL_HOME="$HOME"
 
@@ -16,7 +16,7 @@ print_header() { echo -e "\n${CYAN}=============================================
 timestamp() { echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')]${NC}"; }
 
 timestamp
-print_header "CROSS-SEED INSTALLER (COM PASTA QBIT_LINK)"
+print_header "CROSS-SEED INSTALLER (COM PASTAS QBIT_LINK E OUTPUT)"
 echo -e "Usuário: ${GREEN}$(whoami)${NC}"
 echo -e "Home real: ${GREEN}$REAL_HOME${NC}"
 echo -e "Log: ${GREEN}$LOG_FILE${NC}"
@@ -110,17 +110,25 @@ else
     echo -e "✅ Arquivo de configuração já existe."
 fi
 
-# 7. Criar pasta qbit_link (nova funcionalidade)
-echo -e "\n${CYAN}📁 Criar pasta 'qbit_link' dentro de .cross-seed?${NC}"
-read -p "Isso é útil para links simbólicos do qBittorrent. Deseja criar? (s/N) " -n 1; echo
-if [[ $REPLY =~ ^[Ss]$ ]]; then
-    QBIT_LINK_DIR="$CONFIG_DIR/qbit_link"
-    mkdir -p "$QBIT_LINK_DIR"
-    echo -e "${GREEN}✅ Pasta criada: $QBIT_LINK_DIR${NC}"
-    echo -e "${YELLOW}ℹ️  Você pode usá-la para armazenar links simbólicos dos seus torrents.${NC}"
-else
-    echo -e "Pulando criação da pasta qbit_link."
-fi
+# 7. Criar pastas essenciais (output e qbit_link) e ajustar permissões
+print_header "CRIANDO DIRETÓRIOS ESSENCIAIS E AJUSTANDO PERMISSÕES"
+
+# Define os caminhos absolutos (ajuste se necessário)
+CROSS_SEED_BASE="/APPBOX_DATA/apps/ubuntu.pandinha3.appboxes.co/.cross-seed"
+OUTPUT_DIR="$CROSS_SEED_BASE/output"
+QBIT_LINK_DIR="$CROSS_SEED_BASE/qbit_link"
+
+echo -e "📁 Criando diretório de saída (outputDir): $OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR"
+
+echo -e "📁 Criando diretório de links (qbit_link): $QBIT_LINK_DIR"
+mkdir -p "$QBIT_LINK_DIR"
+
+# Ajusta permissões (755 = rwxr-xr-x)
+echo -e "🔧 Ajustando permissões para $CROSS_SEED_BASE e subpastas..."
+chmod -R 755 "$CROSS_SEED_BASE"
+
+echo -e "${GREEN}✅ Diretórios criados e permissões ajustadas.${NC}"
 
 # 8. Serviço systemd (opcional)
 read -p "Configurar cross-seed como serviço systemd? (s/N) " -n 1; echo
@@ -158,5 +166,5 @@ echo -e "⚙️  Configure: ${CYAN}nano $CONFIG_FILE${NC}"
 echo -e "🚀 Inicie o daemon: ${CYAN}cross-seed daemon${NC}"
 echo -e "📋 Log do serviço: ${CYAN}journalctl -u cross-seed -f${NC}"
 echo -e "📄 Log completo: ${GREEN}$LOG_FILE${NC}"
-echo -e "\n${GREEN}✅ Pronto! O cross-seed já está no PATH desta sessão.${NC}"
+echo -e "\n${GREEN}✅ Pronto! O cross-seed está instalado e as pastas essenciais foram criadas.${NC}"
 echo -e "${YELLOW}ℹ️  Caso abra um novo terminal, o comando 'cross-seed' estará disponível automaticamente.${NC}"

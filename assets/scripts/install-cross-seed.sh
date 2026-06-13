@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-# cross-seed-installer.sh 
-#
-# Install cross-seed ubuntu mate
-#
-# bash -c "$(curl -fsSL https://catboxe.github.io/assets/scripts/install-cross-seed.sh)"
-#
+# cross-seed-installer.sh - Com criação opcional da pasta qbit_link
 
 set -euo pipefail
 
@@ -21,7 +16,7 @@ print_header() { echo -e "\n${CYAN}=============================================
 timestamp() { echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')]${NC}"; }
 
 timestamp
-print_header "CROSS-SEED INSTALLER (COM PATH AUTOMÁTICO)"
+print_header "CROSS-SEED INSTALLER (COM PASTA QBIT_LINK)"
 echo -e "Usuário: ${GREEN}$(whoami)${NC}"
 echo -e "Home real: ${GREEN}$REAL_HOME${NC}"
 echo -e "Log: ${GREEN}$LOG_FILE${NC}"
@@ -39,14 +34,13 @@ for cmd in curl git; do
     fi
 done
 
-# build-essential (opcional)
 if ! dpkg -l | grep -q build-essential; then
     echo -e "${YELLOW}⚠️  build-essential não detectado.${NC}"
     read -p "Instalar? (s/N) " -n 1; echo
     [[ $REPLY =~ ^[Ss]$ ]] && sudo apt install build-essential -y
 fi
 
-# 2. Rollback
+# 2. Rollback (limpeza)
 if [ -d "$REAL_HOME/.nvm" ] || command -v node &>/dev/null; then
     echo -e "${YELLOW}⚠️  Detectados vestígios.${NC}"
     read -p "Remover tudo e começar do zero? (s/N) " -n 1; echo
@@ -82,7 +76,7 @@ nvm alias default 20
 
 NODE_VERSION=$(node --version)
 NODE_PATH="$NVM_DIR/versions/node/$(nvm current)/bin"
-export PATH="$NODE_PATH:$PATH"   # 🔧 AQUI: força o PATH na sessão atual
+export PATH="$NODE_PATH:$PATH"
 
 if ! grep -q "versions/node/v20" "$REAL_HOME/.bashrc"; then
     echo "export PATH=\"$NODE_PATH:\$PATH\"" >> "$REAL_HOME/.bashrc"
@@ -94,7 +88,6 @@ echo -e "${GREEN}✅ Node.js $NODE_VERSION ativo e PATH configurado.${NC}"
 echo -e "📦 Instalando cross-seed..."
 npm install -g cross-seed 2>&1 | grep -v "deprecated" || true
 
-# 6. Validar instalação (agora o PATH já está correto)
 if ! command -v cross-seed &>/dev/null; then
     echo -e "${RED}❌ cross-seed não encontrado.${NC}"
     exit 1
@@ -103,7 +96,7 @@ fi
 CROSS_VERSION=$(cross-seed --version)
 echo -e "${GREEN}✅ cross-seed $CROSS_VERSION instalado.${NC}"
 
-# 7. Configuração
+# 6. Configuração
 CONFIG_DIR="$REAL_HOME/.cross-seed"
 CONFIG_FILE="$CONFIG_DIR/config.js"
 
@@ -115,6 +108,18 @@ if [ ! -f "$CONFIG_FILE" ]; then
     echo -e "${YELLOW}⚠️  Configure manualmente: nano $CONFIG_FILE${NC}"
 else
     echo -e "✅ Arquivo de configuração já existe."
+fi
+
+# 7. Criar pasta qbit_link (nova funcionalidade)
+echo -e "\n${CYAN}📁 Criar pasta 'qbit_link' dentro de .cross-seed?${NC}"
+read -p "Isso é útil para links simbólicos do qBittorrent. Deseja criar? (s/N) " -n 1; echo
+if [[ $REPLY =~ ^[Ss]$ ]]; then
+    QBIT_LINK_DIR="$CONFIG_DIR/qbit_link"
+    mkdir -p "$QBIT_LINK_DIR"
+    echo -e "${GREEN}✅ Pasta criada: $QBIT_LINK_DIR${NC}"
+    echo -e "${YELLOW}ℹ️  Você pode usá-la para armazenar links simbólicos dos seus torrents.${NC}"
+else
+    echo -e "Pulando criação da pasta qbit_link."
 fi
 
 # 8. Serviço systemd (opcional)

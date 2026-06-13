@@ -1,6 +1,14 @@
 #!/bin/bash
 #
-#   sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/Cyneric/servarr-install-script/main/servarr-install-script.sh)"
+#   sudo bash -c "$(curl -fsSL https://catboxe.github.io/assets/scripts/servarr-install-script.sh)"
+#
+# Prowlarr
+#
+# Lidarr
+# Radarr
+# Readarr
+# Sonarr
+# Whisparr
 #
 # Servarr Installation Script
 # Author: Christian Blank (cyneric)

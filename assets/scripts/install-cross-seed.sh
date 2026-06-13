@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-# cross-seed-installer.sh - Versão Corrigida (PATH já na sessão)
+# cross-seed-installer.sh 
+#
+# Install cross-seed ubuntu mate
+#
+# bash -c "$(curl -fsSL https://catboxe.github.io/assets/scripts/install-cross-seed.sh)"
+#
 
 set -euo pipefail
 

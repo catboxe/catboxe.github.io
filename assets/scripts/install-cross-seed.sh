@@ -1,87 +1,47 @@
 #!/usr/bin/env bash
-# cross-seed-installer.sh - Versão Corrigida (com detecção do home real)
+# cross-seed-installer.sh - Versão Corrigida (Documentação Oficial)
 
 set -euo pipefail
 
-# Cores
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-NC='\033[0m'
+RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; CYAN='\033[0;36m'; NC='\033[0m'
 
-# Detecta o diretório home real do usuário (não confia em $HOME)
+# Detecta home real
 REAL_HOME=$(getent passwd "$(whoami)" | cut -d: -f6)
-if [ -z "$REAL_HOME" ]; then
-    REAL_HOME="$HOME"
-fi
+[ -z "$REAL_HOME" ] && REAL_HOME="$HOME"
 
 LOG_FILE="$REAL_HOME/cross-seed-install.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
-print_header() {
-    echo -e "\n${CYAN}========================================================================${NC}"
-    echo -e "${CYAN} $1${NC}"
-    echo -e "${CYAN}========================================================================${NC}"
-}
-
-timestamp() {
-    echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')]${NC}"
-}
-
-get_latest_version() {
-    curl -s https://registry.npmjs.org/cross-seed/latest | grep -o '"version":"[^"]*"' | cut -d'"' -f4
-}
+print_header() { echo -e "\n${CYAN}========================================================================${NC}\n${CYAN} $1${NC}\n${CYAN}========================================================================${NC}"; }
+timestamp() { echo -e "\n${CYAN}[$(date '+%Y-%m-%d %H:%M:%S')]${NC}"; }
 
 timestamp
-print_header "INICIANDO INSTALAÇÃO/ATUALIZAÇÃO DO CROSS-SEED"
-echo -e "Usuário: ${GREEN}$(whoami)${NC} (UID: $EUID)"
-echo -e "Diretório home REAL: ${GREEN}$REAL_HOME${NC}"
+print_header "CROSS-SEED INSTALLER (BASEADO NA DOCUMENTAÇÃO OFICIAL)"
+echo -e "Usuário: ${GREEN}$(whoami)${NC}"
+echo -e "Home real: ${GREEN}$REAL_HOME${NC}"
 echo -e "Log: ${GREEN}$LOG_FILE${NC}"
 
-# ----------------------------------------------------------------------
 # 1. Verificações iniciais
-# ----------------------------------------------------------------------
 if [ "$EUID" -eq 0 ]; then
-    echo -e "${RED}❌ Não execute com sudo.${NC}"
+    echo -e "${RED}❌ NÃO execute com sudo. Use seu usuário normal.${NC}"
     exit 1
 fi
 
 for cmd in curl git; do
     if ! command -v "$cmd" &>/dev/null; then
-        echo -e "${RED}❌ $cmd não instalado. Instale: sudo apt install $cmd${NC}"
+        echo -e "${RED}❌ $cmd não instalado. Execute: sudo apt install $cmd${NC}"
         exit 1
     fi
 done
 
+# build-essential (opcional, para compilar módulos nativos)
 if ! dpkg -l | grep -q build-essential; then
     echo -e "${YELLOW}⚠️  build-essential não detectado.${NC}"
     read -p "Instalar? (s/N) " -n 1; echo
     [[ $REPLY =~ ^[Ss]$ ]] && sudo apt install build-essential -y
 fi
 
-# ----------------------------------------------------------------------
-# 2. Verificação de versão existente e upgrade
-# ----------------------------------------------------------------------
-CURRENT_VERSION=""
-if command -v cross-seed &>/dev/null; then
-    CURRENT_VERSION=$(cross-seed --version 2>/dev/null || echo "desconhecida")
-    echo -e "Versão atual: ${CYAN}$CURRENT_VERSION${NC}"
-    LATEST_VERSION=$(get_latest_version)
-    if [[ -n "$LATEST_VERSION" && "$CURRENT_VERSION" != "$LATEST_VERSION" ]]; then
-        echo -e "Nova versão: ${CYAN}$LATEST_VERSION${NC}"
-        read -p "Atualizar? (s/N) " -n 1; echo
-        if [[ $REPLY =~ ^[Ss]$ ]]; then
-            npm update -g cross-seed
-            echo -e "${GREEN}✅ Atualizado para $(cross-seed --version)${NC}"
-        fi
-    fi
-fi
-
-# ----------------------------------------------------------------------
-# 3. Rollback (limpeza completa) – remove apenas do REAL_HOME
-# ----------------------------------------------------------------------
+# 2. Rollback (se solicitado)
 if [ -d "$REAL_HOME/.nvm" ] || command -v node &>/dev/null; then
     echo -e "${YELLOW}⚠️  Detectados vestígios de nvm/node.${NC}"
     read -p "Remover tudo e começar do zero? (s/N) " -n 1; echo
@@ -91,14 +51,13 @@ if [ -d "$REAL_HOME/.nvm" ] || command -v node &>/dev/null; then
         sed -i '/nvm.sh/d' "$REAL_HOME/.bashrc" 2>/dev/null || true
         unset NVM_DIR
         hash -r
-        echo -e "${GREEN}✅ Ambiente limpo.${NC}"
+        echo -e "${GREEN}✅ Rollback concluído.${NC}"
     fi
 fi
 
-# ----------------------------------------------------------------------
-# 4. Instalar nvm e Node.js (usando REAL_HOME)
-# ----------------------------------------------------------------------
+# 3. Instalar nvm
 if [ ! -d "$REAL_HOME/.nvm" ]; then
+    echo -e "📦 Instalando nvm..."
     curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
 
@@ -110,81 +69,84 @@ if ! command -v nvm &>/dev/null; then
     exit 1
 fi
 
-if ! nvm ls | grep -q "v20"; then
-    nvm install 20
-fi
+# 4. Instalar Node.js 20 (obrigatório, conforme documentação)
+echo -e "📦 Instalando Node.js 20 (obrigatório para cross-seed)..."
+nvm install 20
 nvm use 20
 nvm alias default 20
 
+NODE_VERSION=$(node --version)
 NODE_PATH="$NVM_DIR/versions/node/$(nvm current)/bin"
 export PATH="$NODE_PATH:$PATH"
+
 if ! grep -q "versions/node/v20" "$REAL_HOME/.bashrc"; then
     echo "export PATH=\"$NODE_PATH:\$PATH\"" >> "$REAL_HOME/.bashrc"
 fi
 
-# ----------------------------------------------------------------------
-# 5. Instalar cross-seed
-# ----------------------------------------------------------------------
-if ! command -v cross-seed &>/dev/null; then
-    npm install -g cross-seed
-fi
+echo -e "${GREEN}✅ Node.js $NODE_VERSION ativo.${NC}"
 
+# 5. Instalar cross-seed
+echo -e "📦 Instalando cross-seed..."
+npm install -g cross-seed 2>&1 | grep -v "deprecated" || true  # ignora warnings
+
+# 6. Validar instalação
 if ! command -v cross-seed &>/dev/null; then
     echo -e "${RED}❌ cross-seed não encontrado.${NC}"
     exit 1
 fi
 
-echo -e "${GREEN}✅ cross-seed $(cross-seed --version) instalado.${NC}"
+CROSS_VERSION=$(cross-seed --version)
+echo -e "${GREEN}✅ cross-seed $CROSS_VERSION instalado.${NC}"
 
-# ----------------------------------------------------------------------
-# 6. Gerar config.js (sem edição automática)
-# ----------------------------------------------------------------------
+# 7. Gerar config.js (somente se não existir)
 CONFIG_DIR="$REAL_HOME/.cross-seed"
 CONFIG_FILE="$CONFIG_DIR/config.js"
 
+mkdir -p "$CONFIG_DIR"
 if [ ! -f "$CONFIG_FILE" ]; then
+    echo -e "📝 Gerando arquivo de configuração exemplo..."
     cross-seed gen-config
-    echo -e "${GREEN}✅ Exemplo de configuração em $CONFIG_FILE${NC}"
-    echo -e "${YELLOW}⚠️  Edite manualmente: nano $CONFIG_FILE${NC}"
+    echo -e "${GREEN}✅ Configuração criada em: $CONFIG_FILE${NC}"
+    echo -e "${YELLOW}⚠️  Configure manualmente: nano $CONFIG_FILE${NC}"
+    echo -e "   Itens obrigatórios: torznab (Prowlarr), torrentClients (qBittorrent, etc.)"
 else
-    echo -e "Configuração já existe em $CONFIG_FILE"
-    echo -e "Para editar: nano $CONFIG_FILE"
+    echo -e "✅ Arquivo de configuração já existe."
 fi
 
-# ----------------------------------------------------------------------
-# 7. Serviço systemd (opcional)
-# ----------------------------------------------------------------------
+# 8. Serviço systemd (opcional, com caminhos absolutos)
 read -p "Configurar cross-seed como serviço systemd? (s/N) " -n 1; echo
 if [[ $REPLY =~ ^[Ss]$ ]]; then
+    NODE_ABS=$(which node)
+    CROSS_ABS=$(which cross-seed)
     SERVICE_FILE="/etc/systemd/system/cross-seed.service"
+    
     sudo tee "$SERVICE_FILE" > /dev/null <<EOF
 [Unit]
 Description=cross-seed daemon
 After=network.target
 
 [Service]
-Type=simple
 User=$(whoami)
-ExecStart=$NODE_PATH/cross-seed daemon
-Restart=on-failure
-RestartSec=10
+Group=$(id -gn)
+Restart=always
+Type=simple
+ExecStart=$NODE_ABS $CROSS_ABS daemon
 
 [Install]
 WantedBy=multi-user.target
 EOF
+
     sudo systemctl daemon-reload
     sudo systemctl enable cross-seed.service
     sudo systemctl start cross-seed.service
     echo -e "${GREEN}✅ Serviço iniciado.${NC}"
 else
-    echo -e "Início manual: ${CYAN}cross-seed daemon${NC}"
+    echo -e "Para iniciar manualmente: ${CYAN}cross-seed daemon${NC}"
 fi
 
-# ----------------------------------------------------------------------
-# 8. Final
-# ----------------------------------------------------------------------
+# 9. Final
 print_header "INSTALAÇÃO CONCLUÍDA"
-echo -e "🌐 Interface: ${GREEN}http://$(hostname -I | awk '{print $1}'):2468${NC}"
+echo -e "🌐 Interface web: ${GREEN}http://$(hostname -I | awk '{print $1}'):2468${NC}"
 echo -e "⚙️  Configure: ${CYAN}nano $CONFIG_FILE${NC}"
 echo -e "🚀 Inicie o daemon: ${CYAN}cross-seed daemon${NC}"
 echo -e "📋 Log do serviço: ${CYAN}journalctl -u cross-seed -f${NC}"

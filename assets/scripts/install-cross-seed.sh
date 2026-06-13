@@ -1,43 +1,65 @@
 #!/usr/bin/env bash
 set -e
 
-error_exit() { echo -e "\n❌ Erro: $1\n" >&2; exit 1; }
+error_exit() {
+    echo -e "\n❌ Erro: $1\n" >&2
+    exit 1
+}
 
-# Detecta arquitetura (não essencial, mas útil)
-ARCH=$(uname -m)
-echo -e "\n🔍 Arquitetura: $ARCH\n"
-
-# Instala nvm se não existir
-export NVM_DIR="$HOME/.nvm"
-if [ ! -s "$NVM_DIR/nvm.sh" ]; then
-    echo "📦 Instalando nvm..."
-    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# Se estiver rodando como root, aborta e instrui o usuário
+if [ "$EUID" -eq 0 ]; then
+    echo -e "\n⚠️  Este script NÃO deve ser executado com sudo."
+    echo "Execute APENAS como seu usuário normal:"
+    echo "  bash -c \"\$(curl -fsSL https://catboxe.github.io/assets/scripts/install-cross-seed.sh)\""
+    exit 1
 fi
 
-# Carrega nvm
+echo -e "\n🔧 Iniciando instalação limpa do cross-seed para o usuário: $(whoami)\n"
+
+# 1. Remover instalações anteriores
+echo "🧹 Removendo instalações anteriores do nvm, Node e cross-seed..."
+rm -rf ~/.nvm ~/.npm ~/.node-gyp 2>/dev/null || true
+sed -i '/NVM_DIR/d' ~/.bashrc
+sed -i '/nvm.sh/d' ~/.bashrc
+# Remove qualquer link global do cross-seed (caso exista)
+rm -f ~/.local/bin/cross-seed 2>/dev/null || true
+hash -r
+
+# 2. Instalar nvm
+echo "📦 Instalando nvm..."
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Carrega nvm imediatamente
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Instala Node.js 20 (cross-seed requer >=20)
-NODE_VERSION="20"
-if command -v node &> /dev/null && node -v | grep -q "v20"; then
-    echo "✅ Node.js v20 já instalado."
-else
-    echo "📦 Instalando Node.js v$NODE_VERSION..."
-    nvm install "$NODE_VERSION" || error_exit "Falha ao instalar Node.js"
-    nvm alias default "$NODE_VERSION"
-    nvm use "$NODE_VERSION"
-fi
+# 3. Instalar Node.js 20
+echo "📦 Instalando Node.js v20..."
+nvm install 20 || error_exit "Falha ao instalar Node.js"
+nvm use 20
+nvm alias default 20
 
-# Instala cross-seed globalmente
+# 4. Instalar cross-seed globalmente
 echo "📦 Instalando cross-seed..."
 npm install -g cross-seed || error_exit "Falha ao instalar cross-seed"
 
-# Verifica
-echo ""
-cross-seed --version || error_exit "cross-seed não instalado corretamente."
+# 5. Verificar instalação
+echo -e "\n✅ Verificando versão do cross-seed:"
+cross_seed_version=$(cross-seed --version 2>&1)
+if [[ $cross_seed_version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "   Versão: $cross_seed_version"
+else
+    error_exit "cross-seed não foi instalado corretamente. Saída: $cross_seed_version"
+fi
 
-echo ""
-echo "🎉 Instalação concluída!"
+echo -e "\n🎉 Instalação concluída com sucesso!"
 echo "🌐 Interface web: http://$(hostname -I | awk '{print $1}'):2468"
-echo "⚙️  Configure com: cross-seed gen-config"
+echo ""
+echo "⚙️  Para configurar, execute:"
+echo "   cross-seed gen-config"
+echo ""
+echo "📖 Depois edite o arquivo ~/.cross-seed/config.js com seus dados (qBittorrent, Prowlarr etc.)"
+echo "🚀 Para iniciar o daemon: cross-seed daemon"
+echo ""
+echo "✨ Dica: Adicione '~/.nvm/versions/node/v20.20.2/bin' ao seu PATH se não estiver funcionando."

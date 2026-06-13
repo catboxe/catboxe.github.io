@@ -1,53 +1,62 @@
 #!/usr/bin/env bash
 # cross-seed-installer.sh
-# Instalação robusta, segura e com rollback inteligente
-# Modo de uso: curl -fsSL https://catboxe.github.io/assets/scripts/install-cross-seed.sh | bash
+# Versão ultra verbosa com log completo
 
 set -euo pipefail
-trap 'echo -e "\n❌ Operação interrompida pelo usuário."; exit 1' INT
 
-# Cores
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly NC='\033[0m'
+# Cores (sempre úteis)
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+# Arquivo de log
+LOG_FILE="$HOME/cross-seed-install.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "================================================================================"
+echo "🚀 Instalador do cross-seed - Modo VERBOSE (log em: $LOG_FILE)"
+echo "Data: $(date)"
+echo "Usuário: $(whoami) (UID: $EUID)"
+echo "Diretório home: $HOME"
+echo "================================================================================"
 
 # Funções de logging
-error()  { echo -e "${RED}❌ $*${NC}" >&2; }
-warn()   { echo -e "${YELLOW}⚠️  $*${NC}"; }
-info()   { echo -e "${BLUE}ℹ️  $*${NC}"; }
-success(){ echo -e "${GREEN}✅ $*${NC}"; }
+log_info()    { echo -e "${BLUE}ℹ️  $*${NC}"; }
+log_success() { echo -e "${GREEN}✅ $*${NC}"; }
+log_warn()    { echo -e "${YELLOW}⚠️  $*${NC}"; }
+log_error()   { echo -e "${RED}❌ $*${NC}" >&2; }
 
-# Função de rollback – remove tudo o que foi instalado
+# Rollback
 rollback() {
-    warn "Iniciando rollback completo (remoção de nvm, node, npm e cross-seed)."
+    log_warn "Iniciando rollback completo..."
     rm -rf "$HOME/.nvm" "$HOME/.npm" "$HOME/.node-gyp" 2>/dev/null || true
     sed -i '/NVM_DIR/d' "$HOME/.bashrc" 2>/dev/null || true
     sed -i '/nvm.sh/d' "$HOME/.bashrc" 2>/dev/null || true
     unset NVM_DIR
     hash -r
-    success "Rollback concluído. Nenhum resquício permanece."
+    log_success "Rollback concluído. Nenhum resquício restante."
 }
 
-# Verifica se o script está sendo executado como root (proibido)
+# Verifica se está rodando como root (proibido)
 if [ "$EUID" -eq 0 ]; then
-    error "Este script NÃO deve ser executado com sudo ou como root."
+    log_error "Este script NÃO deve ser executado com sudo ou como root."
     echo "Execute como seu usuário normal:"
     echo "  bash -c \"\$(curl -fsSL https://catboxe.github.io/assets/scripts/install-cross-seed.sh)\""
     exit 1
 fi
 
-# =============================================================================
-# 1. ANÁLISE PRÉVIA DO AMBIENTE (sem modificar nada)
-# =============================================================================
-info "Realizando análise prévia do sistema..."
+# ============================================================================
+# 1. ANÁLISE PRÉVIA DO AMBIENTE
+# ============================================================================
+log_info "Realizando análise prévia do sistema..."
 
-# Verifica dependências essenciais
+# Dependências essenciais
 DEPS_OK=true
 for cmd in curl git; do
     if ! command -v "$cmd" &>/dev/null; then
-        error "$cmd não está instalado. Instale com: sudo apt install $cmd"
+        log_error "$cmd não está instalado. Instale com: sudo apt install $cmd"
         DEPS_OK=false
     fi
 done
@@ -55,122 +64,113 @@ if [ "$DEPS_OK" = false ]; then
     exit 1
 fi
 
-# Verifica se há restos de instalações anteriores e pergunta o que fazer
+log_success "Dependências mínimas satisfeitas (curl e git)."
+
+# Detecta Node.js existente
+if command -v node &>/dev/null; then
+    NODE_VER=$(node --version 2>/dev/null || echo "desconhecida")
+    log_warn "Node.js detectado: $NODE_VER"
+else
+    log_info "Node.js não detectado."
+fi
+
+# Detecta nvm
+if [ -d "$HOME/.nvm" ]; then
+    log_warn "Diretório ~/.nvm encontrado."
+else
+    log_info "Diretório ~/.nvm não existe."
+fi
+
+# Detecta cross-seed
+if command -v cross-seed &>/dev/null; then
+    CROSS_VER=$(cross-seed --version 2>/dev/null || echo "desconhecida")
+    log_warn "cross-seed detectado: $CROSS_VER"
+else
+    log_info "cross-seed não detectado."
+fi
+
+# Pergunta se deseja limpar
 if [ -d "$HOME/.nvm" ] || command -v node &>/dev/null || command -v cross-seed &>/dev/null; then
-    warn "Foram detectados vestígios de nvm, Node.js ou cross-seed no sistema."
-    echo "   - Diretório ~/.nvm: $( [ -d "$HOME/.nvm" ] && echo "EXISTE" || echo "não existe" )"
-    echo "   - Node.js: $( command -v node &>/dev/null && node --version || echo "não instalado" )"
-    echo "   - cross-seed: $( command -v cross-seed &>/dev/null && cross-seed --version || echo "não instalado" )"
     echo ""
-    echo "Deseja remover completamente essas instalações e começar do zero?"
-    echo "Isso é recomendado para evitar conflitos. (s/N)"
+    log_warn "Foram detectados vestígios de instalações anteriores."
+    echo "Deseja removê-los completamente e começar do zero? (s/N)"
     read -r -n 1 resposta
     echo
     if [[ $resposta =~ ^[Ss]$ ]]; then
         rollback
-        success "Ambiente limpo. Agora prosseguiremos com a instalação."
+        log_success "Ambiente limpo. Prosseguindo com instalação nova."
     else
-        warn "Continuando com possíveis conflitos... Se falhar, execute o script novamente e escolha 's'."
+        log_warn "Continuando com possíveis conflitos. Se falhar, execute novamente e escolha 's'."
     fi
 fi
 
-# =============================================================================
-# 2. INSTALAÇÃO PROPRIAMENTE DITA (agora sim)
-# =============================================================================
-info "Iniciando instalação do cross-seed para o usuário $(whoami)..."
+# ============================================================================
+# 2. INSTALAÇÃO DO NVM
+# ============================================================================
+log_info "Baixando e instalando nvm..."
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# Instala nvm
-install_nvm() {
-    info "Baixando e instalando nvm..."
-    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    if ! command -v nvm &>/dev/null; then
-        error "Falha ao instalar ou carregar nvm. Tente reiniciar o terminal e executar novamente."
-        return 1
-    fi
-    success "nvm instalado."
-}
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Instala Node.js 20
-install_node() {
-    info "Instalando Node.js v20 via nvm..."
-    nvm install 20 || { error "Falha na instalação do Node.js"; return 1; }
-    nvm use 20
-    nvm alias default 20
-    if ! node --version | grep -q "v20"; then
-        error "Node.js v20 não está ativo."
-        return 1
-    fi
-    success "Node.js v20 instalado."
-}
+if ! command -v nvm &>/dev/null; then
+    log_error "Falha ao carregar nvm. Tente reiniciar o terminal e executar novamente."
+    exit 1
+fi
+log_success "nvm instalado e carregado."
 
-# Instala cross-seed
-install_cross_seed() {
-    info "Instalando cross-seed globalmente via npm..."
-    npm install -g cross-seed || { error "Falha na instalação do cross-seed"; return 1; }
-    # Garante que o binário esteja no PATH
-    export PATH="$NVM_DIR/versions/node/$(nvm current)/bin:$PATH"
-    if ! command -v cross-seed &>/dev/null; then
-        error "cross-seed instalado, mas não encontrado no PATH."
-        return 1
-    fi
-    success "cross-seed instalado."
-}
+# ============================================================================
+# 3. INSTALAÇÃO DO NODE.JS 20
+# ============================================================================
+log_info "Instalando Node.js v20 via nvm..."
+nvm install 20
+nvm use 20
+nvm alias default 20
 
-# =============================================================================
-# 3. VALIDAÇÃO PÓS-INSTALAÇÃO (com chance de rollback)
-# =============================================================================
-validate_installation() {
-    info "Validando instalação..."
-    local version
-    version=$(cross-seed --version 2>&1)
-    if [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-        success "cross-seed versão $version está funcionando perfeitamente."
-        return 0
-    else
-        error "cross-seed não respondeu com uma versão válida. Saída: $version"
-        warn "Isso pode indicar um problema de ambiente ou dependências."
-        echo "Deseja desfazer TODA a instalação (rollback) e tentar novamente mais tarde? (s/N)"
-        read -r -n 1 resposta
-        echo
-        if [[ $resposta =~ ^[Ss]$ ]]; then
-            rollback
-            error "Instalação desfeita. Execute o script novamente quando quiser tentar de novo."
-            exit 1
-        else
-            error "Instalação comprometida, mas o rollback foi recusado. Considere reinstalar manualmente."
-            exit 1
-        fi
-    fi
-}
+NODE_PATH="$NVM_DIR/versions/node/$(nvm current)/bin"
+if [ ! -x "$NODE_PATH/node" ]; then
+    log_error "Node.js não foi encontrado no caminho esperado: $NODE_PATH"
+    exit 1
+fi
+log_success "Node.js v20 instalado: $($NODE_PATH/node --version)"
 
-# =============================================================================
-# 4. EXECUÇÃO PRINCIPAL COM TRATAMENTO DE ERROS
-# =============================================================================
-main() {
-    echo -e "\n${GREEN}🚀 Instalador Automático do cross-seed (modo seguro)${NC}"
-    echo "Este script fará uma análise completa e só instalará se tudo estiver correto."
-    echo "Em caso de falha, você terá a opção de desfazer completamente a instalação."
-    echo ""
+# ============================================================================
+# 4. INSTALAÇÃO DO CROSS-SEED
+# ============================================================================
+log_info "Instalando cross-seed globalmente via npm..."
+npm install -g cross-seed
 
-    if ! install_nvm; then exit 1; fi
-    if ! install_node; then exit 1; fi
-    if ! install_cross_seed; then exit 1; fi
-    validate_installation
+# Adiciona o binário do Node ao PATH (permanentemente)
+if ! grep -q "versions/node/v20" "$HOME/.bashrc"; then
+    echo "export PATH=\"$NODE_PATH:\$PATH\"" >> "$HOME/.bashrc"
+    log_info "PATH adicionado ao ~/.bashrc"
+fi
 
-    # Sucesso final
-    echo ""
-    success "🎉 cross-seed está pronto para uso!"
-    echo "   🌐 Interface web: http://$(hostname -I | awk '{print $1}'):2468"
-    echo "   ⚙️  Configure com: cross-seed gen-config"
-    echo "   📝 Edite ~/.cross-seed/config.js com seus dados"
-    echo "   🚀 Inicie o daemon: cross-seed daemon"
-    echo ""
-    info "Caso o comando 'cross-seed' não seja encontrado em novos terminais, adicione ao ~/.bashrc:"
-    echo "   export PATH=\"\$HOME/.nvm/versions/node/$(nvm current)/bin:\$PATH\""
-}
+# Adiciona à sessão atual
+export PATH="$NODE_PATH:$PATH"
 
-# Executa o programa principal
-main
+# Verifica se cross-seed está acessível
+if ! command -v cross-seed &>/dev/null; then
+    log_error "cross-seed instalado, mas não encontrado no PATH mesmo após ajuste."
+    echo "Tentativa de localizar o binário:"
+    find "$NVM_DIR" -name "cross-seed" -type f 2>/dev/null || echo "Não encontrado."
+    exit 1
+fi
+
+CROSS_VERSION=$(cross-seed --version)
+log_success "cross-seed versão $CROSS_VERSION instalado."
+
+# ============================================================================
+# 5. VALIDAÇÃO FINAL E INSTRUÇÕES
+# ============================================================================
+echo ""
+log_success "🎉 cross-seed instalado com sucesso!"
+echo "   🌐 Interface web: http://$(hostname -I | awk '{print $1}'):2468"
+echo "   ⚙️  Configure com: cross-seed gen-config"
+echo "   📝 Edite ~/.cross-seed/config.js com seus dados"
+echo "   🚀 Inicie o daemon: cross-seed daemon"
+echo ""
+log_info "Log completo salvo em: $LOG_FILE"
+log_info "Se o comando 'cross-seed' não funcionar neste terminal, execute: source ~/.bashrc"
+echo "================================================================================"
